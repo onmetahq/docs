@@ -1,0 +1,2367 @@
+{
+  "openapi": "3.1.3",
+  "info": {
+    "title": "Introduction",
+    "description": "Onmeta provides the underlying infrastructure that allows DeFi companies,\nWeb3 Gaming companies, NFT marketplaces & other Dapps to allow their end\nusers to exchange fiat currency for crypto tokens and crypto tokens for fiat\ncurrency.\n",
+    "version": "1.0.0",
+    "contact": {},
+    "x-logo": {
+      "url": "https://platform.onmeta.in/_next/static/media/onmetaLogoBlack.4df0e893.svg",
+      "altText": "Onmeta Logo"
+    }
+  },
+  "servers": [
+    {
+      "url": "stg.platform.onmeta.in"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Introduction",
+      "description": "Home Page\n> On/Offramp ![Intro](images/intro-01.webp)\n\n> User Flow ![Flow](images/flow-01.png)\n\n\n# Integration supported.\nWe support the following integration methods for our services i.e. both On and Off Ramp.\n\n- Widget Integration\n- API Integration\nIn this document we will be discussing in detail the steps needed for widget integration in test module and then how to take the widget live. Before we dive into the integration subject, we will quickly highlight the key functionalities of our product in the following two sections.\n\n# Fiat Currency Supported\n  1. INR\n  1. PHP\n\n# Supported Blockchain Networks\n  Builders' building any dApp on our supported blockchain networks can integrate Onmeta to easily On/Off Ramp their users. Our solution is curated for Crypto wallets, Gaming dApps, NFT Marketplaces, DeFi platforms, Crypto Exchanges.\n  1. Polygon\n  1. Binance Smart Chain\n  1. Ethereum\n  1. Arbitrum\n  1. Solana  \n  1. Avalanche\n  1. TON\n  1. Base\n  1. Hedera\n  1. Ronin \n  1. Immutable \n  1. DFK \n  1. Gnosis\n  1. zkEVM\n  1. Tron\n  1. Fantom \n  1. Optimism \n\n# Customizations Possible for Widget Integration.\n  In the widget there are a list of customizations that we allow that you can execute through your dashboard:\n\n  1. You can choose to have either On ramp or Off ramp or both\n  1. You can choose to use Onmeta's KYC module or integrate with your own KYC \n  1. You can choose to customize the fiat currencies and tokens that list in your widget\n  1. You can choose whether the user has to go through an email verification in our widget or not by choosing whether to pass the email ID of the user or not\n  1. You can choose the payment channels that you would like to use\n  1. You can choose the color theme of the widget from light and dark [WIP]\n"
+    },
+    {
+      "name": "Widget",
+      "description": "Onmeta Widget Integration\n# Prerequesite\n  To get started with the widget integration and also to avail the above customisations you need to register yourselves in our Staging Dashboard. Follow the steps below to setup your account in our dashboard:\n  \n> ![API Key flow](images/widget-01.png)\n"
+    },
+    {
+      "name": "Onramp API",
+      "description": "Onramp API"
+    },
+    {
+      "name": "Customer",
+      "description": "This collection is to be used to authenticate user. \nfollowing api requests are available within this.\n\n1. User Login.\n2. Refresh access token.\n3. Link User Bank account.\n4. Fetch the status of linking bank account.\n \n\nyou will get **access token** and **refresh token** from which you can call subsequent api requets which need by server for request authorization."
+    },
+    {
+      "name": "Offramp API",
+      "description": "Offramp API"
+    },
+    {
+      "name": "Webhooks",
+      "description": "Webhooks"
+    },
+    {
+      "name": "Tokens",
+      "description": "Fetch available token list."
+    },
+    {
+      "name": "Token Quotation",
+      "description": "Get Quotation for the given token \nsample body is as below, make sure the chainId and buyTokenAddress are matching..i.e valid tokenaddress from the respective chainId.\n\n| **parameter** | **description** |\n| --- | --- |\n| `buyTokenSymbol` | Symbol of the token needs to be purchased. |\n| `chainId` | Block chain ID - example: 137 for polygon. |\n| `fiatCurrency` | currency from which you are buying - example : \"inr\" for Indian Rupee. |\n| `fiatAmount` | Amount quantitu - example - 100 for 100 rupee |\n| `buyTokenAddress` | smart contract address of the token which needs to be bought. |"
+    },
+    {
+      "name": "Orders",
+      "description": "This collection is about Onramp order related."
+    },
+    {
+      "name": "Webhooks",
+      "description": "This section explains the steps to configure callback urls for receiving events about the transaction.\n\n#### Configuring Webhook\n\nWebhooks are configured in merchant dashboard.\n\nInside **Developers** section, webhook can be added and modified"
+    },
+    {
+      "name": "Offramp Orders",
+      "description": "Offramp order creation api's"
+    },
+    {
+      "name": "Offramp Quotation",
+      "description": "Get Offramp quotation by fiat amount."
+    }
+  ],
+  "paths": {
+    "/v1/users/login": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "User Login",
+        "description": "This collection is to be used to authenticate user. \nfollowing api requests are available within this.\n\n1. User Login.\n2. Refresh access token.\n3. Link User Bank account.\n4. Fetch the status of linking bank account.\n\n\nyou will get **access token** and **refresh token** from which you can call subsequent api requets which need by server for request authorization.",
+        "operationId": "userLogin",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "krishna@onmeta.in"
+                  }
+                }
+              },
+              "examples": {
+                "User Login": {
+                  "value": {
+                    "email": "krishna@onmeta.in"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User Login - Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjQ5MzY1NiwiaWF0IjoxNjU2NDkwMDU2fQ.di8-WklcPJCV4pJkQwWuqs0ywhBc526YdO6kOw_lJVw"
+                        },
+                        "bankDetails": {
+                          "type": "object",
+                          "properties": {
+                            "accountName": {
+                              "type": "string",
+                              "example": "krishna"
+                            },
+                            "accountNumber": {
+                              "type": "string",
+                              "example": "XXXX0000"
+                            },
+                            "branchAddress": {
+                              "type": "string",
+                              "example": "bangalore"
+                            },
+                            "ifsc": {
+                              "type": "string",
+                              "example": "IFB123456"
+                            }
+                          }
+                        },
+                        "panNumber": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "refreshToken": {
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjU3NjQ1NiwiaWF0IjoxNjU2NDkwMDU2fQ.XstcJXjy0RaRJ71wKlReVj6WOPZ9zobB38xA5j4yh-A"
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "User Login - Success": {
+                    "value": {
+                      "data": {
+                        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjQ5MzY1NiwiaWF0IjoxNjU2NDkwMDU2fQ.di8-WklcPJCV4pJkQwWuqs0ywhBc526YdO6kOw_lJVw",
+                        "bankDetails": {
+                          "accountName": "krishna",
+                          "accountNumber": "XXXX0000",
+                          "branchAddress": "bangalore",
+                          "ifsc": "IFB123456"
+                        },
+                        "panNumber": "",
+                        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjU3NjQ1NiwiaWF0IjoxNjU2NDkwMDU2fQ.XstcJXjy0RaRJ71wKlReVj6WOPZ9zobB38xA5j4yh-A"
+                      },
+                      "error": {},
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/refresh-token": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Refresh Access Token",
+        "description": "Refresh Access Token",
+        "operationId": "refreshAccessToken",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Refresh Access Token - Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjQ5Mzg0NiwiaWF0IjoxNjU2NDkwMjQ2fQ._YLziCnRu85sVGbMSi14oCkJ65lgZnUd0wzidFP83u4"
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Refresh Access Token - Success": {
+                    "value": {
+                      "data": {
+                        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjQ5Mzg0NiwiaWF0IjoxNjU2NDkwMjQ2fQ._YLziCnRu85sVGbMSi14oCkJ65lgZnUd0wzidFP83u4"
+                      },
+                      "error": {},
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/account-link": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Link User Account",
+        "description": "Link User Account",
+        "operationId": "linkUserAccount",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bankDetails": {
+                    "type": "object",
+                    "properties": {
+                      "accountName": {
+                        "type": "string",
+                        "example": "Krishna Teja Nemani"
+                      },
+                      "accountNumber": {
+                        "type": "string",
+                        "example": "123456789"
+                      },
+                      "ifsc": {
+                        "type": "string",
+                        "example": "HDFC0003980"
+                      }
+                    }
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "krishna@onmeta.in"
+                  },
+                  "kycVerfied": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Krishna Teja Nemani"
+                  },
+                  "panNumber": {
+                    "type": "string",
+                    "example": "INDBN5612"
+                  }
+                }
+              },
+              "examples": {
+                "Link User Account": {
+                  "value": {
+                    "bankDetails": {
+                      "accountName": "Krishna Teja Nemani",
+                      "accountNumber": "123456789",
+                      "ifsc": "HDFC0003980"
+                    },
+                    "email": "krishna@onmeta.in",
+                    "kycVerfied": true,
+                    "name": "Krishna Teja Nemani",
+                    "panNumber": "INDBN5612"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Link User Account - Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "referenceNumber": {
+                          "type": "string",
+                          "example": "b45c3cec-97ae-4c68-bd4a-3ec19f9aedbd"
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "SUCCESS"
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Link User Account - Success": {
+                    "value": {
+                      "data": {
+                        "referenceNumber": "b45c3cec-97ae-4c68-bd4a-3ec19f9aedbd",
+                        "status": "SUCCESS"
+                      },
+                      "error": {},
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/get-bank-status/a8789a5b-5850-4ad9-b0ae-8cc41d0b64ff": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Fetch bank verification status",
+        "description": "Fetch bank verification status",
+        "operationId": "fetchBankVerificationStatus",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "Fetch bank verification status": {
+                  "value": ""
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fetch bank verification status - Success",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "168"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Mon, 17 Oct 2022 13:03:45 GMT"
+                }
+              },
+              "Server": {
+                "schema": {
+                  "type": "string",
+                  "example": "nginx/1.18.0 (Ubuntu)"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "bankStatus": {
+                          "type": "string",
+                          "example": "SUCCESS"
+                        },
+                        "referenceId": {
+                          "type": "string",
+                          "example": "5bb15e6d-c751-48dd-af74-d080904ae307"
+                        },
+                        "transactionId": {
+                          "type": "string",
+                          "example": "63f584b8-e29e-4c45-a756-2c382c48cf6f"
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Fetch bank verification status - Success": {
+                    "value": {
+                      "data": {
+                        "bankStatus": "SUCCESS",
+                        "referenceId": "5bb15e6d-c751-48dd-af74-d080904ae307",
+                        "transactionId": "63f584b8-e29e-4c45-a756-2c382c48cf6f"
+                      },
+                      "error": {},
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/tokens": {
+      "get": {
+        "tags": [
+          "Crypto Tokens"
+        ],
+        "summary": "Fetch Tokens",
+        "description": "Fetch Tokens",
+        "operationId": "fetchTokens",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetch Tokens - Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "example": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
+                    },
+                    "chainId": {
+                      "type": "number",
+                      "example": 137
+                    },
+                    "decimals": {
+                      "type": "number",
+                      "example": 18
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "USD Coin (PoS)"
+                    },
+                    "symbol": {
+                      "type": "string",
+                      "example": "USDC"
+                    }
+                  }
+                },
+                "examples": {
+                  "Fetch Tokens - Success": {
+                    "value": {
+                      "address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+                      "chainId": 137,
+                      "decimals": 18,
+                      "name": "USD Coin (PoS)",
+                      "symbol": "USDC"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/quote/buy": {
+      "post": {
+        "tags": [
+          "Crypto Token Quotation"
+        ],
+        "summary": "Fetch Quotation",
+        "description": "Fetch Quotation",
+        "operationId": "fetchQuotation",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "buyTokenAddress": {
+                    "type": "string",
+                    "example": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
+                  },
+                  "buyTokenSymbol": {
+                    "type": "string",
+                    "example": "USDC"
+                  },
+                  "chainId": {
+                    "type": "number",
+                    "example": 137
+                  },
+                  "fiatAmount": {
+                    "type": "number",
+                    "example": 100
+                  },
+                  "fiatCurrency": {
+                    "type": "string",
+                    "example": "inr"
+                  }
+                }
+              },
+              "examples": {
+                "Fetch Quotation": {
+                  "value": {
+                    "buyTokenAddress": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+                    "buyTokenSymbol": "USDC",
+                    "chainId": 137,
+                    "fiatAmount": 100,
+                    "fiatCurrency": "inr"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fetch Quotation - Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "conversionRate": {
+                          "type": "string",
+                          "example": "8.395798071e+13"
+                        },
+                        "desiredOrder": {
+                          "type": "object",
+                          "properties": {
+                            "base": {
+                              "type": "object",
+                              "properties": {
+                                "gasChargeInINR": {
+                                  "type": "string",
+                                  "example": "0.0"
+                                },
+                                "transactionFee": {
+                                  "type": "number",
+                                  "example": 0
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "estimateId": {
+                          "type": "string",
+                          "example": "f2e41883-2916-400e-85f6-376adf48b0d4"
+                        },
+                        "gasPriceNativeToken": {
+                          "type": "string",
+                          "example": "2450000000000000"
+                        },
+                        "gasPriceWei": {
+                          "type": "string",
+                          "example": "35000000000"
+                        },
+                        "gasUseEstimate": {
+                          "type": "string",
+                          "example": "70000"
+                        },
+                        "nativeTokenDecimals": {
+                          "type": "number",
+                          "example": 18
+                        },
+                        "orders": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "amountIn": {
+                                "type": "string",
+                                "example": "1191072"
+                              },
+                              "amountOut": {
+                                "type": "string",
+                                "example": "1191072"
+                              },
+                              "source": {
+                                "type": "string",
+                                "example": "STF"
+                              },
+                              "tokenIn": {
+                                "type": "object",
+                                "properties": {
+                                  "address": {
+                                    "type": "string",
+                                    "example": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889"
+                                  },
+                                  "chainId": {
+                                    "type": "number",
+                                    "example": 137
+                                  },
+                                  "decimals": {
+                                    "type": "number",
+                                    "example": 18
+                                  },
+                                  "isBlacklist": {
+                                    "type": "boolean",
+                                    "example": false
+                                  },
+                                  "isVisible": {
+                                    "type": "boolean",
+                                    "example": false
+                                  },
+                                  "logoURI": {
+                                    "type": "string",
+                                    "example": ""
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "example": ""
+                                  },
+                                  "sources": {
+                                    "type": "string",
+                                    "nullable": true,
+                                    "example": null
+                                  },
+                                  "symbol": {
+                                    "type": "string",
+                                    "example": ""
+                                  },
+                                  "updatedAt": {
+                                    "type": "string",
+                                    "example": "0001-01-01T00:00:00Z"
+                                  }
+                                }
+                              },
+                              "tokenOut": {
+                                "type": "object",
+                                "properties": {
+                                  "address": {
+                                    "type": "string",
+                                    "example": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889"
+                                  },
+                                  "chainId": {
+                                    "type": "number",
+                                    "example": 137
+                                  },
+                                  "decimals": {
+                                    "type": "number",
+                                    "example": 18
+                                  },
+                                  "isBlacklist": {
+                                    "type": "boolean",
+                                    "example": false
+                                  },
+                                  "isVisible": {
+                                    "type": "boolean",
+                                    "example": false
+                                  },
+                                  "logoURI": {
+                                    "type": "string",
+                                    "example": ""
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "example": ""
+                                  },
+                                  "sources": {
+                                    "type": "string",
+                                    "nullable": true,
+                                    "example": null
+                                  },
+                                  "symbol": {
+                                    "type": "string",
+                                    "example": ""
+                                  },
+                                  "updatedAt": {
+                                    "type": "string",
+                                    "example": "0001-01-01T00:00:00Z"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "example": [
+                            {
+                              "amountIn": "1191072",
+                              "amountOut": "1191072",
+                              "source": "STF",
+                              "tokenIn": {
+                                "address": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                                "chainId": 137,
+                                "decimals": 18,
+                                "isBlacklist": false,
+                                "isVisible": false,
+                                "logoURI": "",
+                                "name": "",
+                                "sources": null,
+                                "symbol": "",
+                                "updatedAt": "0001-01-01T00:00:00Z"
+                              },
+                              "tokenOut": {
+                                "address": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                                "chainId": 137,
+                                "decimals": 18,
+                                "isBlacklist": false,
+                                "isVisible": false,
+                                "logoURI": "",
+                                "name": "",
+                                "sources": null,
+                                "symbol": "",
+                                "updatedAt": "0001-01-01T00:00:00Z"
+                              }
+                            }
+                          ]
+                        },
+                        "quote": {
+                          "type": "string",
+                          "example": "1191072"
+                        },
+                        "receivedTokens": {
+                          "type": "string",
+                          "example": "1.191072e-12"
+                        },
+                        "source": {
+                          "type": "string",
+                          "example": "STF"
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Fetch Quotation - Success": {
+                    "value": {
+                      "data": {
+                        "conversionRate": "8.395798071e+13",
+                        "desiredOrder": {
+                          "base": {
+                            "gasChargeInINR": "0.0",
+                            "transactionFee": 0
+                          }
+                        },
+                        "estimateId": "f2e41883-2916-400e-85f6-376adf48b0d4",
+                        "gasPriceNativeToken": "2450000000000000",
+                        "gasPriceWei": "35000000000",
+                        "gasUseEstimate": "70000",
+                        "nativeTokenDecimals": 18,
+                        "orders": [
+                          {
+                            "amountIn": "1191072",
+                            "amountOut": "1191072",
+                            "source": "STF",
+                            "tokenIn": {
+                              "address": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                              "chainId": 137,
+                              "decimals": 18,
+                              "isBlacklist": false,
+                              "isVisible": false,
+                              "logoURI": "",
+                              "name": "",
+                              "sources": null,
+                              "symbol": "",
+                              "updatedAt": "0001-01-01T00:00:00Z"
+                            },
+                            "tokenOut": {
+                              "address": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                              "chainId": 137,
+                              "decimals": 18,
+                              "isBlacklist": false,
+                              "isVisible": false,
+                              "logoURI": "",
+                              "name": "",
+                              "sources": null,
+                              "symbol": "",
+                              "updatedAt": "0001-01-01T00:00:00Z"
+                            }
+                          }
+                        ],
+                        "quote": "1191072",
+                        "receivedTokens": "1.191072e-12",
+                        "source": "STF"
+                      },
+                      "error": {},
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/create": {
+      "post": {
+        "tags": [
+          "Onramp Api",
+          "Orders"
+        ],
+        "summary": "Create Order",
+        "description": "Create Order",
+        "operationId": "createOrder",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "buyTokenAddress": {
+                    "type": "string",
+                    "example": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
+                  },
+                  "buyTokenSymbol": {
+                    "type": "string",
+                    "example": "USDC"
+                  },
+                  "chainId": {
+                    "type": "number",
+                    "example": 137
+                  },
+                  "fiatAmount": {
+                    "type": "number",
+                    "example": 100
+                  },
+                  "fiatCurrency": {
+                    "type": "string",
+                    "example": "inr"
+                  },
+                  "paymentMode": {
+                    "type": "string",
+                    "example": "INR_UPI"
+                  },
+                  "receiverAddress": {
+                    "type": "string",
+                    "example": "0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC"
+                  }
+                }
+              },
+              "examples": {
+                "Create Order": {
+                  "value": {
+                    "buyTokenAddress": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+                    "buyTokenSymbol": "USDC",
+                    "chainId": 137,
+                    "fiatAmount": 100,
+                    "fiatCurrency": "inr",
+                    "paymentMode": "INR_UPI",
+                    "receiverAddress": "0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create Order - Success",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "102"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Mon, 17 Oct 2022 13:35:40 GMT"
+                }
+              },
+              "Server": {
+                "schema": {
+                  "type": "string",
+                  "example": "nginx/1.18.0 (Ubuntu)"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "orderId": {
+                          "type": "string",
+                          "example": "634d5a2c14384e30ee15004f"
+                        },
+                        "pgOrderId": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "upiCode": {
+                          "type": "string",
+                          "example": ""
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Create Order - Success": {
+                    "value": {
+                      "data": {
+                        "orderId": "634d5a2c14384e30ee15004f",
+                        "pgOrderId": "",
+                        "upiCode": ""
+                      },
+                      "error": {},
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/status": {
+      "post": {
+        "tags": [
+          "Onramp Api",
+          "Orders"
+        ],
+        "summary": "Fetch Order Status",
+        "description": "Fetch Order Status",
+        "operationId": "fetchOrderStatus",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "orderId": {
+                    "type": "string",
+                    "example": "628234ad5ea94d20f76ed6bd"
+                  }
+                }
+              },
+              "examples": {
+                "Fetch Order Status": {
+                  "value": {
+                    "orderId": "628234ad5ea94d20f76ed6bd"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fetch Order Status - Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "explorerUrl": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "fiatPending"
+                        },
+                        "transactionHash": {
+                          "type": "string",
+                          "example": ""
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Fetch Order Status - Success": {
+                    "value": {
+                      "data": {
+                        "explorerUrl": "",
+                        "status": "fiatPending",
+                        "transactionHash": ""
+                      },
+                      "error": {},
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/utr": {
+      "post": {
+        "tags": [
+          "Onramp Api",
+          "Orders"
+        ],
+        "summary": "Update UTR",
+        "description": "Update UTR",
+        "operationId": "updateUtr",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "orderId": {
+                    "type": "string",
+                    "example": "628234ad5ea94d20f76ed6bd"
+                  },
+                  "utr": {
+                    "type": "string",
+                    "example": "213456789096ASDF"
+                  }
+                }
+              },
+              "examples": {
+                "Update UTR": {
+                  "value": {
+                    "orderId": "628234ad5ea94d20f76ed6bd",
+                    "utr": "213456789096ASDF"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update UTR - Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Update UTR - Success": {
+                    "value": {
+                      "error": {},
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Update UTR - Invalid UTR",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "number",
+                          "example": 403
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid UTR"
+                        }
+                      }
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    }
+                  }
+                },
+                "examples": {
+                  "Update UTR - Invalid UTR": {
+                    "value": {
+                      "error": {
+                        "code": 403,
+                        "message": "Invalid UTR"
+                      },
+                      "success": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/{api_skip}": {
+      "get": {
+        "tags": [
+          "Onramp Api",
+          "Orders"
+        ],
+        "summary": "Fetch Users Order History",
+        "description": "`/v1/orders/{{skip}}`\n\nAPI returns 10 recent transactions of the user. Skip is used for pagination. For fetching next 10 latest transactions value of skip is 1\n\nFew important states.\n\n| **Status** | **Explanation** |\n| --- | --- |\n| fiatPending | Yet to receive the fiat payment |\n| fiatReceived | Received Fiat |\n| completed | Tokens are transferred to the wallet |",
+        "operationId": "fetchUsersOrderHistory",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetch Users Order History",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "amount": {
+                            "type": "number",
+                            "example": 100
+                          },
+                          "buyTokenAddress": {
+                            "type": "string",
+                            "example": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889"
+                          },
+                          "buyTokenSymbol": {
+                            "type": "string",
+                            "example": "WMATIC"
+                          },
+                          "chainId": {
+                            "type": "number",
+                            "example": 137
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "example": "2022-06-22T11:15:16.18Z"
+                          },
+                          "currency": {
+                            "type": "string",
+                            "example": "INR"
+                          },
+                          "orderId": {
+                            "type": "string",
+                            "example": "62b2f9c40800242e0f481f44"
+                          },
+                          "paymentDetails": {
+                            "type": "object",
+                            "properties": {
+                              "reference": {
+                                "type": "string",
+                                "example": "213456789096ASaazDFQASAZAQW"
+                              },
+                              "source": {
+                                "type": "string",
+                                "example": "UTR"
+                              }
+                            }
+                          },
+                          "reason": {
+                            "type": "string",
+                            "example": ""
+                          },
+                          "receiverWalletAddress": {
+                            "type": "string",
+                            "example": "0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E"
+                          },
+                          "source": {
+                            "type": "string",
+                            "example": "UTR"
+                          },
+                          "status": {
+                            "type": "string",
+                            "example": "completed"
+                          },
+                          "txnHash": {
+                            "type": "string",
+                            "example": "0x..."
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "amount": 100,
+                          "buyTokenAddress": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                          "buyTokenSymbol": "WMATIC",
+                          "chainId": 137,
+                          "created_at": "2022-06-22T11:15:16.18Z",
+                          "currency": "INR",
+                          "orderId": "62b2f9c40800242e0f481f44",
+                          "paymentDetails": {
+                            "reference": "213456789096ASaazDFQASAZAQW",
+                            "source": "UTR"
+                          },
+                          "reason": "",
+                          "receiverWalletAddress": "0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E",
+                          "source": "UTR",
+                          "status": "completed",
+                          "txnHash": "0x..."
+                        },
+                        {
+                          "amount": 100,
+                          "buyTokenAddress": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                          "buyTokenSymbol": "WMATIC",
+                          "chainId": 137,
+                          "created_at": "2022-06-22T11:13:43.331Z",
+                          "currency": "INR",
+                          "orderId": "62b2f9670800242e0f481f41",
+                          "paymentDetails": {
+                            "reference": "213456789096ASaazDFQASAZA",
+                            "source": "UTR"
+                          },
+                          "reason": "Senders account number does not match with registered account",
+                          "receiverWalletAddress": "0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E",
+                          "source": "UTR",
+                          "status": "fiatRefundInitiated"
+                        }
+                      ]
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Fetch Users Order History": {
+                    "value": {
+                      "data": [
+                        {
+                          "amount": 100,
+                          "buyTokenAddress": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                          "buyTokenSymbol": "WMATIC",
+                          "chainId": 137,
+                          "created_at": "2022-06-22T11:15:16.18Z",
+                          "currency": "INR",
+                          "orderId": "62b2f9c40800242e0f481f44",
+                          "paymentDetails": {
+                            "reference": "213456789096ASaazDFQASAZAQW",
+                            "source": "UTR"
+                          },
+                          "reason": "",
+                          "receiverWalletAddress": "0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E",
+                          "source": "UTR",
+                          "status": "completed",
+                          "txnHash": "0x..."
+                        },
+                        {
+                          "amount": 100,
+                          "buyTokenAddress": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                          "buyTokenSymbol": "WMATIC",
+                          "chainId": 137,
+                          "created_at": "2022-06-22T11:13:43.331Z",
+                          "currency": "INR",
+                          "orderId": "62b2f9670800242e0f481f41",
+                          "paymentDetails": {
+                            "reference": "213456789096ASaazDFQASAZA",
+                            "source": "UTR"
+                          },
+                          "reason": "Senders account number does not match with registered account",
+                          "receiverWalletAddress": "0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E",
+                          "source": "UTR",
+                          "status": "fiatRefundInitiated"
+                        }
+                      ],
+                      "error": {},
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "api_skip",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/v1/orders/currencies": {
+      "get": {
+        "tags": [
+          "Onramp Api",
+          "Orders"
+        ],
+        "summary": "Supported Currencies",
+        "description": "Supported Currencies",
+        "operationId": "supportedCurrencies",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/orders/invoice/{order_id}": {
+      "get": {
+        "tags": [
+          "Onramp Api",
+          "Orders"
+        ],
+        "summary": "Get Invoice PDF",
+        "description": "The response for this API is PDF URL which has a validity of 1 hour. After which it will be expired. If expired new URL can be regerated by calling the same API",
+        "operationId": "getInvoicePdf",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API Key from Dashboard"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "order_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/": {
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Completed Order - Success",
+        "description": "This callback will be triggered when the crypto coins are deposited to the given receiver address.\n\n###### ***Headers***\n\n| Key | Value |\n| --- | --- |\n| Content-Type | application/json; charset=utf-8 |\n| X-Onmeta-Signature | {{signature-of-the-request}} |\n\nSignature is computed using Hash-based message authentication code (HMAC) using a secret key. The secret key is the API Secret present in your merchant dashboard.\n\n###### ***Generating HMAC***\n\nThe example implementation in Nodejs\n\n``` javascript\nlet hmac = crypto.createHmac('sha256', apiSecret);\nhmac.update(JSON.stringify(postBody));\nlet hash = hmac.digest('hex');\nassert(hash == headers[\"X-Onmeta-Signature\"])\n\n```",
+        "operationId": "completedOrderSuccess",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "buyTokenAddress": {
+                    "type": "string",
+                    "example": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889"
+                  },
+                  "buyTokenSymbol": {
+                    "type": "string",
+                    "example": "WMATIC"
+                  },
+                  "chainId": {
+                    "type": "number",
+                    "example": 80001
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2022-05-03T11:00:01.899Z"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "example": "INR"
+                  },
+                  "customer": {
+                    "type": "object",
+                    "properties": {
+                      "created_at": {
+                        "type": "string",
+                        "example": "2022-04-05T12:13:51.899Z"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "krishna@onmeta.in"
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "624c327f9d6e3c59e99c7871"
+                      },
+                      "phone": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    }
+                  },
+                  "fiat": {
+                    "type": "number",
+                    "example": 100
+                  },
+                  "orderId": {
+                    "type": "string",
+                    "example": "62811baa5ea94d20f76ed69d"
+                  },
+                  "receiverWalletAddress": {
+                    "type": "string",
+                    "example": "0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "completed"
+                  },
+                  "transferredAmount": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "transferredAmountWei": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "txnHash": {
+                    "type": "string",
+                    "example": ""
+                  }
+                }
+              },
+              "examples": {
+                "Completed Order - Success": {
+                  "value": {
+                    "buyTokenAddress": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                    "buyTokenSymbol": "WMATIC",
+                    "chainId": 80001,
+                    "createdAt": "2022-05-03T11:00:01.899Z",
+                    "currency": "INR",
+                    "customer": {
+                      "created_at": "2022-04-05T12:13:51.899Z",
+                      "email": "krishna@onmeta.in",
+                      "id": "624c327f9d6e3c59e99c7871",
+                      "phone": {}
+                    },
+                    "fiat": 100,
+                    "orderId": "62811baa5ea94d20f76ed69d",
+                    "receiverWalletAddress": "0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E",
+                    "status": "completed",
+                    "transferredAmount": "",
+                    "transferredAmountWei": "",
+                    "txnHash": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/offramp/orders/create": {
+      "post": {
+        "tags": [
+          "Offramp orders"
+        ],
+        "summary": "Create Order",
+        "description": "| **Body params** | **Description** |\n| --- | --- |\n| `sellTokenSymbol` | Token symbol - `example: \"USDC\"` |\n| `sellTokenAddress` | Token address of the above symbol : `ex:0x2791bca1f2de4661ed88a30c99a7a9449aa84174` |\n| `chainId` | Blockchain ID : `example: \"137\" for polygon` |\n| `fiatCurrency` | currency symbol : `example :\"inr\" only inr is supported.` |\n| `fiatAmount` | amount quantity for which you want to buy : `example: 100 for 100 rupee` |\n| `senderWalletAddress` | wallet address from which token are debited. `ex: 0xCdF10Bc7a1fAE3934C222320ACe912547971cC` |\n| `bankDetails` | object of bank details for payout |\n| `accountNumber` | only last 4 digits of linked account. `ex: XXXX5528` |\n| `ifsc` | linked Bank ifsc code `ex:\"HDFC0003980\"` |\n| `refundWalletAddress` | refund wallet address to refund |",
+        "operationId": "offrampCreateOrder",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bankDetails": {
+                    "type": "object",
+                    "properties": {
+                      "accountNumber": {
+                        "type": "string",
+                        "example": "XXXX5528"
+                      },
+                      "ifsc": {
+                        "type": "string",
+                        "example": "HDFC0003980"
+                      }
+                    }
+                  },
+                  "chainId": {
+                    "type": "number",
+                    "example": 137
+                  },
+                  "fiatCurrency": {
+                    "type": "string",
+                    "example": "inr"
+                  },
+                  "refundWalletAddress": {
+                    "type": "string",
+                    "example": "0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E"
+                  },
+                  "sellTokenAddress": {
+                    "type": "string",
+                    "example": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
+                  },
+                  "sellTokenAmount": {
+                    "type": "number",
+                    "example": 100
+                  },
+                  "sellTokenSymbol": {
+                    "type": "string",
+                    "example": "USDC"
+                  },
+                  "senderWalletAddress": {
+                    "type": "string",
+                    "example": "0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC"
+                  }
+                }
+              },
+              "examples": {
+                "Create Order": {
+                  "value": {
+                    "bankDetails": {
+                      "accountNumber": "XXXX5528",
+                      "ifsc": "HDFC0003980"
+                    },
+                    "chainId": 137,
+                    "fiatAmount": 100,
+                    "fiatCurrency": "inr",
+                    "refundWalletAddress": "0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E",
+                    "sellTokenAddress": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+                    "sellTokenSymbol": "USDC",
+                    "senderWalletAddress": "0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC"
+                  }
+                },
+                "Create Order With Crypto Amount": {
+                  "value": {
+                    "bankDetails": {
+                      "accountNumber": "XXXX5528",
+                      "ifsc": "HDFC0003980"
+                    },
+                    "chainId": 137,
+                    "fiatCurrency": "inr",
+                    "refundWalletAddress": "0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E",
+                    "sellTokenAddress": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+                    "sellTokenAmount": 100,
+                    "sellTokenSymbol": "USDC",
+                    "senderWalletAddress": "0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create Order - Success / Create Order With Crypto Amount",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "262"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 25 Nov 2022 12:22:35 GMT"
+                }
+              },
+              "Server": {
+                "schema": {
+                  "type": "string",
+                  "example": "nginx/1.18.0 (Ubuntu)"
+                }
+              }
+            },
+            "content": {
+              "text/plain": {
+                "examples": {
+                  "Create Order - Success": {
+                    "value": "{\n \"success\": true,\n \"data\": {\n\t\t\"orderId\":\"1234\",\n\t\t\"receiverWalletAddress\":\"0x12343232322223232323232323\",\n\t\t\"gasPriceWei\":\"1234200000\",\n\t\t\"gasUseEstimate\":\"70000\",\n\t\t\"quote\":\"1112233\",\n\t},\n\t\"error\": {}\n}"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Create Order - 404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "number",
+                          "example": 404
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Bank details are not found for the user"
+                        }
+                      }
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    }
+                  }
+                },
+                "examples": {
+                  "Create Order - 404": {
+                    "value": {
+                      "error": {
+                        "code": 404,
+                        "message": "Bank details are not found for the user"
+                      },
+                      "success": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/offramp/orders/status": {
+      "post": {
+        "tags": [
+          "Offramp orders"
+        ],
+        "summary": "Fetch Order Status",
+        "description": "Fetch the status of the Offramp order by orderId.",
+        "operationId": "OfframpFetchOrderStatus",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "orderId": {
+                    "type": "string",
+                    "example": "63108f7fc2f9dec3b1dd5743"
+                  }
+                }
+              },
+              "examples": {
+                "Fetch Order Status": {
+                  "value": {
+                    "orderId": "63108f7fc2f9dec3b1dd5743"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fetch Order Status - Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "bankDetails": {
+                          "type": "object",
+                          "properties": {
+                            "accountName": {
+                              "type": "string",
+                              "example": "Satoshi"
+                            },
+                            "accountNumber": {
+                              "type": "string",
+                              "example": "121231212"
+                            },
+                            "branchAddress": {
+                              "type": "string",
+                              "example": "whitefield"
+                            },
+                            "ifsc": {
+                              "type": "string",
+                              "example": "HDFC00001131"
+                            }
+                          }
+                        },
+                        "chainId": {
+                          "type": "string",
+                          "example": "80001"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "example": "2022-09-12T12:12:434Z0"
+                        },
+                        "currency": {
+                          "type": "string",
+                          "example": "inr"
+                        },
+                        "customer": {
+                          "type": "object",
+                          "properties": {
+                            "created_at": {
+                              "type": "string",
+                              "example": "2022-09-12T12:12:434Z0"
+                            },
+                            "email": {
+                              "type": "string",
+                              "example": "test@test.com"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Satoshi"
+                            },
+                            "phone": {
+                              "type": "object",
+                              "properties": {
+                                "CountryCode": {
+                                  "type": "string",
+                                  "example": "+91"
+                                },
+                                "Number": {
+                                  "type": "string",
+                                  "example": "1234567890"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "fiat": {
+                          "type": "number",
+                          "example": 100
+                        },
+                        "orderId": {
+                          "type": "string",
+                          "example": "1244334342"
+                        },
+                        "reason": {
+                          "type": "string",
+                          "example": ""
+                        },
+                        "receiverWalletAddress": {
+                          "type": "string",
+                          "example": "0x4113112"
+                        },
+                        "sellTokenAddress": {
+                          "type": "string",
+                          "example": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889"
+                        },
+                        "sellTokenSymbol": {
+                          "type": "string",
+                          "example": "WMATIC"
+                        },
+                        "senderWalletAddress": {
+                          "type": "string",
+                          "example": "0x32311131"
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "pending"
+                        },
+                        "txnHash": {
+                          "type": "string",
+                          "example": "0x1131242424232323"
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Fetch Order Status - Success": {
+                    "value": {
+                      "data": {
+                        "bankDetails": {
+                          "accountName": "Satoshi",
+                          "accountNumber": "121231212",
+                          "branchAddress": "whitefield",
+                          "ifsc": "HDFC00001131"
+                        },
+                        "chainId": "80001",
+                        "created_at": "2022-09-12T12:12:434Z0",
+                        "currency": "inr",
+                        "customer": {
+                          "created_at": "2022-09-12T12:12:434Z0",
+                          "email": "test@test.com",
+                          "name": "Satoshi",
+                          "phone": {
+                            "CountryCode": "+91",
+                            "Number": "1234567890"
+                          }
+                        },
+                        "fiat": 100,
+                        "orderId": "1244334342",
+                        "reason": "",
+                        "receiverWalletAddress": "0x4113112",
+                        "sellTokenAddress": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                        "sellTokenSymbol": "WMATIC",
+                        "senderWalletAddress": "0x32311131",
+                        "status": "pending",
+                        "txnHash": "0x1131242424232323"
+                      },
+                      "error": {},
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/offramp/orders/txnhash": {
+      "post": {
+        "tags": [
+          "Offramp orders"
+        ],
+        "summary": "Update Transaction Hash",
+        "description": "Update Transaction Hash",
+        "operationId": "updateTransactionHash",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "orderId": {
+                    "type": "string",
+                    "example": "63108f7fc2f9dec3b1dd5743"
+                  },
+                  "txnHash": {
+                    "type": "string",
+                    "example": "0xe01d9c4c55376334618f53e729b65a79ca531ea33a81f465373dd969e8ebcfc1"
+                  }
+                }
+              },
+              "examples": {
+                "Update Transaction Hash": {
+                  "value": {
+                    "orderId": "63108f7fc2f9dec3b1dd5743",
+                    "txnHash": "0xe01d9c4c55376334618f53e729b65a79ca531ea33a81f465373dd969e8ebcfc1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "409": {
+            "description": "Update Transaction Hash - 409",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "number",
+                          "example": 409
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Duplicate transaction hash"
+                        }
+                      }
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    }
+                  }
+                },
+                "examples": {
+                  "Update Transaction Hash - 409": {
+                    "value": {
+                      "error": {
+                        "code": 409,
+                        "message": "Duplicate transaction hash"
+                      },
+                      "success": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/quote/sell": {
+      "post": {
+        "tags": [
+          "Offramp Quotation"
+        ],
+        "summary": "Quotation By Fiat Amount",
+        "description": "Quotation By Fiat Amount",
+        "operationId": "quotationByFiatAmount",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{api_key}}"
+            },
+            "description": "API key from dashboard."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "chainId": {
+                    "type": "number",
+                    "example": 137
+                  },
+                  "fiatCurrency": {
+                    "type": "string",
+                    "example": "inr"
+                  },
+                  "sellTokenAddress": {
+                    "type": "string",
+                    "example": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
+                  },
+                  "sellTokenAmount": {
+                    "type": "number",
+                    "example": 100
+                  },
+                  "sellTokenSymbol": {
+                    "type": "string",
+                    "example": "USDC"
+                  },
+                  "senderAddress": {
+                    "type": "string",
+                    "example": "0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC"
+                  }
+                }
+              },
+              "examples": {
+                "Quotation By Fiat Amount": {
+                  "value": {
+                    "chainId": 80001,
+                    "fiatAmount": 100,
+                    "fiatCurrency": "inr",
+                    "sellTokenAddress": "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                    "sellTokenSymbol": "WMATIC",
+                    "senderAddress": "0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC"
+                  }
+                },
+                "Quotation by crypto amount": {
+                  "value": {
+                    "chainId": 137,
+                    "fiatCurrency": "inr",
+                    "sellTokenAddress": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+                    "sellTokenAmount": 100,
+                    "sellTokenSymbol": "USDC",
+                    "senderAddress": "0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Quotation By Fiat Amount - Success / Quotation by crypto amount",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "191"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Fri, 25 Nov 2022 10:59:40 GMT"
+                }
+              },
+              "Server": {
+                "schema": {
+                  "type": "string",
+                  "example": "nginx/1.18.0 (Ubuntu)"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "conversionRate": {
+                          "type": "string",
+                          "example": "82.21"
+                        },
+                        "fiatAmount": {
+                          "type": "number",
+                          "example": 100
+                        },
+                        "fiatCurrency": {
+                          "type": "string",
+                          "example": "inr"
+                        },
+                        "gasFee": {
+                          "type": "number",
+                          "example": 7
+                        },
+                        "sellTokens": {
+                          "type": "string",
+                          "example": "1.234"
+                        },
+                        "transactionFee": {
+                          "type": "number",
+                          "example": 3
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Quotation By Fiat Amount - Success": {
+                    "value": {
+                      "data": {
+                        "conversionRate": "82.21",
+                        "fiatAmount": 100,
+                        "fiatCurrency": "inr",
+                        "gasFee": 7,
+                        "sellTokens": "1.234",
+                        "transactionFee": 3
+                      },
+                      "error": {},
+                      "success": true
+                    }
+                  },
+                  "Quotation by crypto amount": {
+                    "value": {
+                      "data": {
+                        "conversionRate": "84.449002",
+                        "fiatAmount": 8444.90016171818,
+                        "fiatCurrency": "inr",
+                        "gasFee": 0.211281588,
+                        "sellTokens": "100.000000",
+                        "transactionFee": 0
+                      },
+                      "error": {},
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "x-tagGroups": [
+    {
+      "name": "Home",
+      "tags": [
+        "Introduction"
+      ]
+    },
+    {
+      "name": "Widget",
+      "tags": [
+        "Widget"
+      ]
+    },
+    {
+      "name": "Customer API",
+      "tags": [
+        "Customer"
+      ]
+    },
+    {
+      "name": "Onramp",
+      "tags": [
+        "Tokens",
+        "Token Quotation",
+        "Orders"
+      ]
+    },
+    {
+      "name": "Offramp API",
+      "tags": [
+        "Offramp Orders",
+        "Offramp Quotation"
+      ]
+    },
+    {
+      "name": "Webhook",
+      "tags": [
+        "Webhooks"
+      ]
+    }
+  ]
+}

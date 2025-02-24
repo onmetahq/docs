@@ -1,0 +1,62 @@
+post:
+  tags:
+    - Onramp Api
+    - Orders
+  summary: Fetch Order Status
+  description: Fetch Order Status
+  operationId: fetchOrderStatus
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            orderId:
+              type: string
+              example: 628234ad5ea94d20f76ed6bd
+        examples:
+          Fetch Order Status:
+            value:
+              orderId: 628234ad5ea94d20f76ed6bd
+  responses:
+    '200':
+      description: Fetch Order Status - Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  explorerUrl:
+                    type: string
+                    example: ''
+                  status:
+                    type: string
+                    example: fiatPending
+                  transactionHash:
+                    type: string
+                    example: ''
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            Fetch Order Status - Success:
+              value:
+                data:
+                  explorerUrl: ''
+                  status: fiatPending
+                  transactionHash: ''
+                error: {}
+                success: true

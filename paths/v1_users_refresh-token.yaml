@@ -1,0 +1,42 @@
+get:
+  tags:
+    - Customer
+  summary: Refresh Access Token
+  description: Refresh Access Token
+  operationId: refreshAccessToken
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  responses:
+    '200':
+      description: Refresh Access Token - Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: >-
+                      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjQ5Mzg0NiwiaWF0IjoxNjU2NDkwMjQ2fQ._YLziCnRu85sVGbMSi14oCkJ65lgZnUd0wzidFP83u4
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            Refresh Access Token - Success:
+              value:
+                data:
+                  accessToken: >-
+                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjQ5Mzg0NiwiaWF0IjoxNjU2NDkwMjQ2fQ._YLziCnRu85sVGbMSi14oCkJ65lgZnUd0wzidFP83u4
+                error: {}
+                success: true

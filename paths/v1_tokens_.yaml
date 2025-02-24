@@ -1,0 +1,44 @@
+get:
+  tags:
+    - Crypto Tokens
+  summary: Fetch Tokens
+  description: Fetch Tokens
+  operationId: fetchTokens
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  responses:
+    '200':
+      description: Fetch Tokens - Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              address:
+                type: string
+                example: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+              chainId:
+                type: number
+                example: 137
+              decimals:
+                type: number
+                example: 18
+              name:
+                type: string
+                example: USD Coin (PoS)
+              symbol:
+                type: string
+                example: USDC
+          examples:
+            Fetch Tokens - Success:
+              value:
+                address: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+                chainId: 137
+                decimals: 18
+                name: USD Coin (PoS)
+                symbol: USDC

@@ -1,0 +1,11 @@
+apis:
+  main@v1:
+    root: openapi.yaml
+extends:
+  - recommended
+rules:
+  security-defined: off
+theme:
+  openapi:
+    hideDownloadButton: true
+

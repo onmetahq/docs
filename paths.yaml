@@ -1,0 +1,125 @@
+post:
+  tags:
+    - Webhooks
+  summary: Completed Order - Success
+  description: >-
+    This callback will be triggered when the crypto coins are deposited to the
+    given receiver address.
+
+
+    ###### ***Headers***
+
+
+    | Key | Value |
+
+    | --- | --- |
+
+    | Content-Type | application/json; charset=utf-8 |
+
+    | X-Onmeta-Signature | {{signature-of-the-request}} |
+
+
+    Signature is computed using Hash-based message authentication code (HMAC)
+    using a secret key. The secret key is the API Secret present in your
+    merchant dashboard.
+
+
+    ###### ***Generating HMAC***
+
+
+    The example implementation in Nodejs
+
+
+    ``` javascript
+
+    let hmac = crypto.createHmac('sha256', apiSecret);
+
+    hmac.update(JSON.stringify(postBody));
+
+    let hash = hmac.digest('hex');
+
+    assert(hash == headers["X-Onmeta-Signature"])
+
+
+    ```
+  operationId: completedOrderSuccess
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            buyTokenAddress:
+              type: string
+              example: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+            buyTokenSymbol:
+              type: string
+              example: WMATIC
+            chainId:
+              type: number
+              example: 80001
+            createdAt:
+              type: string
+              example: '2022-05-03T11:00:01.899Z'
+            currency:
+              type: string
+              example: INR
+            customer:
+              type: object
+              properties:
+                created_at:
+                  type: string
+                  example: '2022-04-05T12:13:51.899Z'
+                email:
+                  type: string
+                  example: krishna@onmeta.in
+                id:
+                  type: string
+                  example: 624c327f9d6e3c59e99c7871
+                phone:
+                  type: object
+                  properties: {}
+            fiat:
+              type: number
+              example: 100
+            orderId:
+              type: string
+              example: 62811baa5ea94d20f76ed69d
+            receiverWalletAddress:
+              type: string
+              example: '0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E'
+            status:
+              type: string
+              example: completed
+            transferredAmount:
+              type: string
+              example: ''
+            transferredAmountWei:
+              type: string
+              example: ''
+            txnHash:
+              type: string
+              example: ''
+        examples:
+          Completed Order - Success:
+            value:
+              buyTokenAddress: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+              buyTokenSymbol: WMATIC
+              chainId: 80001
+              createdAt: '2022-05-03T11:00:01.899Z'
+              currency: INR
+              customer:
+                created_at: '2022-04-05T12:13:51.899Z'
+                email: krishna@onmeta.in
+                id: 624c327f9d6e3c59e99c7871
+                phone: {}
+              fiat: 100
+              orderId: 62811baa5ea94d20f76ed69d
+              receiverWalletAddress: '0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E'
+              status: completed
+              transferredAmount: ''
+              transferredAmountWei: ''
+              txnHash: ''
+  responses:
+    '200':
+      description: ''

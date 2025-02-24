@@ -1,0 +1,85 @@
+post:
+  tags:
+    - Customer
+  summary: Link User Account
+  description: Link User Account
+  operationId: linkUserAccount
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            bankDetails:
+              type: object
+              properties:
+                accountName:
+                  type: string
+                  example: Krishna Teja Nemani
+                accountNumber:
+                  type: string
+                  example: '123456789'
+                ifsc:
+                  type: string
+                  example: HDFC0003980
+            email:
+              type: string
+              example: krishna@onmeta.in
+            kycVerfied:
+              type: boolean
+              example: true
+            name:
+              type: string
+              example: Krishna Teja Nemani
+            panNumber:
+              type: string
+              example: INDBN5612
+        examples:
+          Link User Account:
+            value:
+              bankDetails:
+                accountName: Krishna Teja Nemani
+                accountNumber: '123456789'
+                ifsc: HDFC0003980
+              email: krishna@onmeta.in
+              kycVerfied: true
+              name: Krishna Teja Nemani
+              panNumber: INDBN5612
+  responses:
+    '200':
+      description: Link User Account - Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  referenceNumber:
+                    type: string
+                    example: b45c3cec-97ae-4c68-bd4a-3ec19f9aedbd
+                  status:
+                    type: string
+                    example: SUCCESS
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            Link User Account - Success:
+              value:
+                data:
+                  referenceNumber: b45c3cec-97ae-4c68-bd4a-3ec19f9aedbd
+                  status: SUCCESS
+                error: {}
+                success: true

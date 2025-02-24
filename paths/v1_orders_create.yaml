@@ -1,0 +1,103 @@
+post:
+  tags:
+    - Onramp Api
+    - Orders
+  summary: Create Order
+  description: Create Order
+  operationId: createOrder
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            buyTokenAddress:
+              type: string
+              example: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+            buyTokenSymbol:
+              type: string
+              example: USDC
+            chainId:
+              type: number
+              example: 137
+            fiatAmount:
+              type: number
+              example: 100
+            fiatCurrency:
+              type: string
+              example: inr
+            paymentMode:
+              type: string
+              example: INR_UPI
+            receiverAddress:
+              type: string
+              example: '0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC'
+        examples:
+          Create Order:
+            value:
+              buyTokenAddress: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+              buyTokenSymbol: USDC
+              chainId: 137
+              fiatAmount: 100
+              fiatCurrency: inr
+              paymentMode: INR_UPI
+              receiverAddress: '0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC'
+  responses:
+    '200':
+      description: Create Order - Success
+      headers:
+        Connection:
+          schema:
+            type: string
+            example: keep-alive
+        Content-Length:
+          schema:
+            type: string
+            example: '102'
+        Date:
+          schema:
+            type: string
+            example: Mon, 17 Oct 2022 13:35:40 GMT
+        Server:
+          schema:
+            type: string
+            example: nginx/1.18.0 (Ubuntu)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  orderId:
+                    type: string
+                    example: 634d5a2c14384e30ee15004f
+                  pgOrderId:
+                    type: string
+                    example: ''
+                  upiCode:
+                    type: string
+                    example: ''
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            Create Order - Success:
+              value:
+                data:
+                  orderId: 634d5a2c14384e30ee15004f
+                  pgOrderId: ''
+                  upiCode: ''
+                error: {}
+                success: true

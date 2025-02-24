@@ -1,0 +1,26 @@
+get:
+  tags:
+    - Onramp Api
+    - Orders
+  summary: Get Invoice PDF
+  description: >-
+    The response for this API is PDF URL which has a validity of 1 hour. After
+    which it will be expired. If expired new URL can be regerated by calling the
+    same API
+  operationId: getInvoicePdf
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API Key from Dashboard
+  responses:
+    '200':
+      description: ''
+parameters:
+  - name: order_id
+    in: path
+    required: true
+    schema:
+      type: string

@@ -1,0 +1,145 @@
+post:
+  tags:
+    - Offramp orders
+  summary: Fetch Order Status
+  description: Fetch the status of the Offramp order by orderId.
+  operationId: OfframpFetchOrderStatus
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            orderId:
+              type: string
+              example: 63108f7fc2f9dec3b1dd5743
+        examples:
+          Fetch Order Status:
+            value:
+              orderId: 63108f7fc2f9dec3b1dd5743
+  responses:
+    '200':
+      description: Fetch Order Status - Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  bankDetails:
+                    type: object
+                    properties:
+                      accountName:
+                        type: string
+                        example: Satoshi
+                      accountNumber:
+                        type: string
+                        example: '121231212'
+                      branchAddress:
+                        type: string
+                        example: whitefield
+                      ifsc:
+                        type: string
+                        example: HDFC00001131
+                  chainId:
+                    type: string
+                    example: '80001'
+                  created_at:
+                    type: string
+                    example: 2022-09-12T12:12:434Z0
+                  currency:
+                    type: string
+                    example: inr
+                  customer:
+                    type: object
+                    properties:
+                      created_at:
+                        type: string
+                        example: 2022-09-12T12:12:434Z0
+                      email:
+                        type: string
+                        example: test@test.com
+                      name:
+                        type: string
+                        example: Satoshi
+                      phone:
+                        type: object
+                        properties:
+                          CountryCode:
+                            type: string
+                            example: '+91'
+                          Number:
+                            type: string
+                            example: '1234567890'
+                  fiat:
+                    type: number
+                    example: 100
+                  orderId:
+                    type: string
+                    example: '1244334342'
+                  reason:
+                    type: string
+                    example: ''
+                  receiverWalletAddress:
+                    type: string
+                    example: '0x4113112'
+                  sellTokenAddress:
+                    type: string
+                    example: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                  sellTokenSymbol:
+                    type: string
+                    example: WMATIC
+                  senderWalletAddress:
+                    type: string
+                    example: '0x32311131'
+                  status:
+                    type: string
+                    example: pending
+                  txnHash:
+                    type: string
+                    example: '0x1131242424232323'
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            Fetch Order Status - Success:
+              value:
+                data:
+                  bankDetails:
+                    accountName: Satoshi
+                    accountNumber: '121231212'
+                    branchAddress: whitefield
+                    ifsc: HDFC00001131
+                  chainId: '80001'
+                  created_at: 2022-09-12T12:12:434Z0
+                  currency: inr
+                  customer:
+                    created_at: 2022-09-12T12:12:434Z0
+                    email: test@test.com
+                    name: Satoshi
+                    phone:
+                      CountryCode: '+91'
+                      Number: '1234567890'
+                  fiat: 100
+                  orderId: '1244334342'
+                  reason: ''
+                  receiverWalletAddress: '0x4113112'
+                  sellTokenAddress: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                  sellTokenSymbol: WMATIC
+                  senderWalletAddress: '0x32311131'
+                  status: pending
+                  txnHash: '0x1131242424232323'
+                error: {}
+                success: true

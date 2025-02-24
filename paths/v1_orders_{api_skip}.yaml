@@ -1,0 +1,172 @@
+get:
+  tags:
+    - Onramp Api
+    - Orders
+  summary: Fetch Users Order History
+  description: >-
+    `/v1/orders/{{skip}}`
+
+
+    API returns 10 recent transactions of the user. Skip is used for pagination.
+    For fetching next 10 latest transactions value of skip is 1
+
+
+    Few important states.
+
+
+    | **Status** | **Explanation** |
+
+    | --- | --- |
+
+    | fiatPending | Yet to receive the fiat payment |
+
+    | fiatReceived | Received Fiat |
+
+    | completed | Tokens are transferred to the wallet |
+  operationId: fetchUsersOrderHistory
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  responses:
+    '200':
+      description: Fetch Users Order History
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                      example: 100
+                    buyTokenAddress:
+                      type: string
+                      example: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                    buyTokenSymbol:
+                      type: string
+                      example: WMATIC
+                    chainId:
+                      type: number
+                      example: 137
+                    created_at:
+                      type: string
+                      example: '2022-06-22T11:15:16.18Z'
+                    currency:
+                      type: string
+                      example: INR
+                    orderId:
+                      type: string
+                      example: 62b2f9c40800242e0f481f44
+                    paymentDetails:
+                      type: object
+                      properties:
+                        reference:
+                          type: string
+                          example: 213456789096ASaazDFQASAZAQW
+                        source:
+                          type: string
+                          example: UTR
+                    reason:
+                      type: string
+                      example: ''
+                    receiverWalletAddress:
+                      type: string
+                      example: '0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E'
+                    source:
+                      type: string
+                      example: UTR
+                    status:
+                      type: string
+                      example: completed
+                    txnHash:
+                      type: string
+                      example: 0x...
+                example:
+                  - amount: 100
+                    buyTokenAddress: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                    buyTokenSymbol: WMATIC
+                    chainId: 137
+                    created_at: '2022-06-22T11:15:16.18Z'
+                    currency: INR
+                    orderId: 62b2f9c40800242e0f481f44
+                    paymentDetails:
+                      reference: 213456789096ASaazDFQASAZAQW
+                      source: UTR
+                    reason: ''
+                    receiverWalletAddress: '0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E'
+                    source: UTR
+                    status: completed
+                    txnHash: 0x...
+                  - amount: 100
+                    buyTokenAddress: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                    buyTokenSymbol: WMATIC
+                    chainId: 137
+                    created_at: '2022-06-22T11:13:43.331Z'
+                    currency: INR
+                    orderId: 62b2f9670800242e0f481f41
+                    paymentDetails:
+                      reference: 213456789096ASaazDFQASAZA
+                      source: UTR
+                    reason: >-
+                      Senders account number does not match with registered
+                      account
+                    receiverWalletAddress: '0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E'
+                    source: UTR
+                    status: fiatRefundInitiated
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            Fetch Users Order History:
+              value:
+                data:
+                  - amount: 100
+                    buyTokenAddress: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                    buyTokenSymbol: WMATIC
+                    chainId: 137
+                    created_at: '2022-06-22T11:15:16.18Z'
+                    currency: INR
+                    orderId: 62b2f9c40800242e0f481f44
+                    paymentDetails:
+                      reference: 213456789096ASaazDFQASAZAQW
+                      source: UTR
+                    reason: ''
+                    receiverWalletAddress: '0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E'
+                    source: UTR
+                    status: completed
+                    txnHash: 0x...
+                  - amount: 100
+                    buyTokenAddress: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                    buyTokenSymbol: WMATIC
+                    chainId: 137
+                    created_at: '2022-06-22T11:13:43.331Z'
+                    currency: INR
+                    orderId: 62b2f9670800242e0f481f41
+                    paymentDetails:
+                      reference: 213456789096ASaazDFQASAZA
+                      source: UTR
+                    reason: >-
+                      Senders account number does not match with registered
+                      account
+                    receiverWalletAddress: '0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E'
+                    source: UTR
+                    status: fiatRefundInitiated
+                error: {}
+                success: true
+parameters:
+  - name: api_skip
+    in: path
+    required: true
+    schema:
+      type: string

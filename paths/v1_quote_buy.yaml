@@ -1,0 +1,251 @@
+post:
+  tags:
+    - Crypto Token Quotation
+  summary: Fetch Quotation
+  description: Fetch Quotation
+  operationId: fetchQuotation
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            buyTokenAddress:
+              type: string
+              example: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+            buyTokenSymbol:
+              type: string
+              example: USDC
+            chainId:
+              type: number
+              example: 137
+            fiatAmount:
+              type: number
+              example: 100
+            fiatCurrency:
+              type: string
+              example: inr
+        examples:
+          Fetch Quotation:
+            value:
+              buyTokenAddress: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+              buyTokenSymbol: USDC
+              chainId: 137
+              fiatAmount: 100
+              fiatCurrency: inr
+  responses:
+    '200':
+      description: Fetch Quotation - Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  conversionRate:
+                    type: string
+                    example: '8.395798071e+13'
+                  desiredOrder:
+                    type: object
+                    properties:
+                      base:
+                        type: object
+                        properties:
+                          gasChargeInINR:
+                            type: string
+                            example: '0.0'
+                          transactionFee:
+                            type: number
+                            example: 0
+                  estimateId:
+                    type: string
+                    example: f2e41883-2916-400e-85f6-376adf48b0d4
+                  gasPriceNativeToken:
+                    type: string
+                    example: '2450000000000000'
+                  gasPriceWei:
+                    type: string
+                    example: '35000000000'
+                  gasUseEstimate:
+                    type: string
+                    example: '70000'
+                  nativeTokenDecimals:
+                    type: number
+                    example: 18
+                  orders:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        amountIn:
+                          type: string
+                          example: '1191072'
+                        amountOut:
+                          type: string
+                          example: '1191072'
+                        source:
+                          type: string
+                          example: STF
+                        tokenIn:
+                          type: object
+                          properties:
+                            address:
+                              type: string
+                              example: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                            chainId:
+                              type: number
+                              example: 137
+                            decimals:
+                              type: number
+                              example: 18
+                            isBlacklist:
+                              type: boolean
+                              example: false
+                            isVisible:
+                              type: boolean
+                              example: false
+                            logoURI:
+                              type: string
+                              example: ''
+                            name:
+                              type: string
+                              example: ''
+                            sources:
+                              type: string
+                              nullable: true
+                              example: null
+                            symbol:
+                              type: string
+                              example: ''
+                            updatedAt:
+                              type: string
+                              example: '0001-01-01T00:00:00Z'
+                        tokenOut:
+                          type: object
+                          properties:
+                            address:
+                              type: string
+                              example: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                            chainId:
+                              type: number
+                              example: 137
+                            decimals:
+                              type: number
+                              example: 18
+                            isBlacklist:
+                              type: boolean
+                              example: false
+                            isVisible:
+                              type: boolean
+                              example: false
+                            logoURI:
+                              type: string
+                              example: ''
+                            name:
+                              type: string
+                              example: ''
+                            sources:
+                              type: string
+                              nullable: true
+                              example: null
+                            symbol:
+                              type: string
+                              example: ''
+                            updatedAt:
+                              type: string
+                              example: '0001-01-01T00:00:00Z'
+                    example:
+                      - amountIn: '1191072'
+                        amountOut: '1191072'
+                        source: STF
+                        tokenIn:
+                          address: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                          chainId: 137
+                          decimals: 18
+                          isBlacklist: false
+                          isVisible: false
+                          logoURI: ''
+                          name: ''
+                          sources: null
+                          symbol: ''
+                          updatedAt: '0001-01-01T00:00:00Z'
+                        tokenOut:
+                          address: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                          chainId: 137
+                          decimals: 18
+                          isBlacklist: false
+                          isVisible: false
+                          logoURI: ''
+                          name: ''
+                          sources: null
+                          symbol: ''
+                          updatedAt: '0001-01-01T00:00:00Z'
+                  quote:
+                    type: string
+                    example: '1191072'
+                  receivedTokens:
+                    type: string
+                    example: '1.191072e-12'
+                  source:
+                    type: string
+                    example: STF
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            Fetch Quotation - Success:
+              value:
+                data:
+                  conversionRate: '8.395798071e+13'
+                  desiredOrder:
+                    base:
+                      gasChargeInINR: '0.0'
+                      transactionFee: 0
+                  estimateId: f2e41883-2916-400e-85f6-376adf48b0d4
+                  gasPriceNativeToken: '2450000000000000'
+                  gasPriceWei: '35000000000'
+                  gasUseEstimate: '70000'
+                  nativeTokenDecimals: 18
+                  orders:
+                    - amountIn: '1191072'
+                      amountOut: '1191072'
+                      source: STF
+                      tokenIn:
+                        address: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                        chainId: 137
+                        decimals: 18
+                        isBlacklist: false
+                        isVisible: false
+                        logoURI: ''
+                        name: ''
+                        sources: null
+                        symbol: ''
+                        updatedAt: '0001-01-01T00:00:00Z'
+                      tokenOut:
+                        address: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+                        chainId: 137
+                        decimals: 18
+                        isBlacklist: false
+                        isVisible: false
+                        logoURI: ''
+                        name: ''
+                        sources: null
+                        symbol: ''
+                        updatedAt: '0001-01-01T00:00:00Z'
+                  quote: '1191072'
+                  receivedTokens: '1.191072e-12'
+                  source: STF
+                error: {}
+                success: true

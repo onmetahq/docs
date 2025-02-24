@@ -1,0 +1,71 @@
+get:
+  tags:
+    - Customer
+  summary: Fetch bank verification status
+  description: Fetch bank verification status
+  operationId: fetchBankVerificationStatus
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  requestBody:
+    content:
+      application/json:
+        examples:
+          Fetch bank verification status:
+            value: ''
+  responses:
+    '200':
+      description: Fetch bank verification status - Success
+      headers:
+        Connection:
+          schema:
+            type: string
+            example: keep-alive
+        Content-Length:
+          schema:
+            type: string
+            example: '168'
+        Date:
+          schema:
+            type: string
+            example: Mon, 17 Oct 2022 13:03:45 GMT
+        Server:
+          schema:
+            type: string
+            example: nginx/1.18.0 (Ubuntu)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  bankStatus:
+                    type: string
+                    example: SUCCESS
+                  referenceId:
+                    type: string
+                    example: 5bb15e6d-c751-48dd-af74-d080904ae307
+                  transactionId:
+                    type: string
+                    example: 63f584b8-e29e-4c45-a756-2c382c48cf6f
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            Fetch bank verification status - Success:
+              value:
+                data:
+                  bankStatus: SUCCESS
+                  referenceId: 5bb15e6d-c751-48dd-af74-d080904ae307
+                  transactionId: 63f584b8-e29e-4c45-a756-2c382c48cf6f
+                error: {}
+                success: true

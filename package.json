@@ -1,0 +1,17 @@
+{
+  "name": "api-docs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "redocly build-docs openapi.yaml",
+    "serve": "redocly preview-docs openapi.yaml"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@redocly/cli": "^1.30.0"
+  }
+}

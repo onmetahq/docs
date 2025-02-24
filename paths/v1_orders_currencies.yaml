@@ -1,0 +1,17 @@
+get:
+  tags:
+    - Onramp Api
+    - Orders
+  summary: Supported Currencies
+  description: Supported Currencies
+  operationId: supportedCurrencies
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  responses:
+    '200':
+      description: ''

@@ -1,0 +1,102 @@
+post:
+  tags:
+    - Customer
+  summary: User Login
+  description: >-
+    This collection is to be used to authenticate user. 
+
+    following api requests are available within this.
+
+
+    1. User Login.
+
+    2. Refresh access token.
+
+    3. Link User Bank account.
+
+    4. Fetch the status of linking bank account.
+
+
+
+    you will get **access token** and **refresh token** from which you can call
+    subsequent api requets which need by server for request authorization.
+  operationId: userLogin
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+              example: krishna@onmeta.in
+        examples:
+          User Login:
+            value:
+              email: krishna@onmeta.in
+  responses:
+    '200':
+      description: User Login - Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: >-
+                      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjQ5MzY1NiwiaWF0IjoxNjU2NDkwMDU2fQ.di8-WklcPJCV4pJkQwWuqs0ywhBc526YdO6kOw_lJVw
+                  bankDetails:
+                    type: object
+                    properties:
+                      accountName:
+                        type: string
+                        example: krishna
+                      accountNumber:
+                        type: string
+                        example: XXXX0000
+                      branchAddress:
+                        type: string
+                        example: bangalore
+                      ifsc:
+                        type: string
+                        example: IFB123456
+                  panNumber:
+                    type: string
+                    example: ''
+                  refreshToken:
+                    type: string
+                    example: >-
+                      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjU3NjQ1NiwiaWF0IjoxNjU2NDkwMDU2fQ.XstcJXjy0RaRJ71wKlReVj6WOPZ9zobB38xA5j4yh-A
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            User Login - Success:
+              value:
+                data:
+                  accessToken: >-
+                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjQ5MzY1NiwiaWF0IjoxNjU2NDkwMDU2fQ.di8-WklcPJCV4pJkQwWuqs0ywhBc526YdO6kOw_lJVw
+                  bankDetails:
+                    accountName: krishna
+                    accountNumber: XXXX0000
+                    branchAddress: bangalore
+                    ifsc: IFB123456
+                  panNumber: ''
+                  refreshToken: >-
+                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjRjMzI3ZjlkNmUzYzU5ZTk5Yzc4NzEiLCJ0ZW5hbnRJZCI6IjYyMjBhMWIzYzRiODNmYzljYTA4YjlhMCIsImV4cCI6MTY1NjU3NjQ1NiwiaWF0IjoxNjU2NDkwMDU2fQ.XstcJXjy0RaRJ71wKlReVj6WOPZ9zobB38xA5j4yh-A
+                error: {}
+                success: true

@@ -1,0 +1,152 @@
+post:
+  tags:
+    - Offramp orders
+  summary: Create Order
+  description: >-
+    | **Body params** | **Description** |
+
+    | --- | --- |
+
+    | `sellTokenSymbol` | Token symbol - `example: "USDC"` |
+
+    | `sellTokenAddress` | Token address of the above symbol :
+    `ex:0x2791bca1f2de4661ed88a30c99a7a9449aa84174` |
+
+    | `chainId` | Blockchain ID : `example: "137" for polygon` |
+
+    | `fiatCurrency` | currency symbol : `example :"inr" only inr is supported.`
+    |
+
+    | `fiatAmount` | amount quantity for which you want to buy : `example: 100
+    for 100 rupee` |
+
+    | `senderWalletAddress` | wallet address from which token are debited. `ex:
+    0xCdF10Bc7a1fAE3934C222320ACe912547971cC` |
+
+    | `bankDetails` | object of bank details for payout |
+
+    | `accountNumber` | only last 4 digits of linked account. `ex: XXXX5528` |
+
+    | `ifsc` | linked Bank ifsc code `ex:"HDFC0003980"` |
+
+    | `refundWalletAddress` | refund wallet address to refund |
+  operationId: offrampCreateOrder
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            bankDetails:
+              type: object
+              properties:
+                accountNumber:
+                  type: string
+                  example: XXXX5528
+                ifsc:
+                  type: string
+                  example: HDFC0003980
+            chainId:
+              type: number
+              example: 137
+            fiatCurrency:
+              type: string
+              example: inr
+            refundWalletAddress:
+              type: string
+              example: '0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E'
+            sellTokenAddress:
+              type: string
+              example: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+            sellTokenAmount:
+              type: number
+              example: 100
+            sellTokenSymbol:
+              type: string
+              example: USDC
+            senderWalletAddress:
+              type: string
+              example: '0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC'
+        examples:
+          Create Order:
+            value:
+              bankDetails:
+                accountNumber: XXXX5528
+                ifsc: HDFC0003980
+              chainId: 137
+              fiatAmount: 100
+              fiatCurrency: inr
+              refundWalletAddress: '0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E'
+              sellTokenAddress: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+              sellTokenSymbol: USDC
+              senderWalletAddress: '0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC'
+          Create Order With Crypto Amount:
+            value:
+              bankDetails:
+                accountNumber: XXXX5528
+                ifsc: HDFC0003980
+              chainId: 137
+              fiatCurrency: inr
+              refundWalletAddress: '0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E'
+              sellTokenAddress: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+              sellTokenAmount: 100
+              sellTokenSymbol: USDC
+              senderWalletAddress: '0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC'
+  responses:
+    '200':
+      description: Create Order - Success / Create Order With Crypto Amount
+      headers:
+        Connection:
+          schema:
+            type: string
+            example: keep-alive
+        Content-Length:
+          schema:
+            type: string
+            example: '262'
+        Date:
+          schema:
+            type: string
+            example: Fri, 25 Nov 2022 12:22:35 GMT
+        Server:
+          schema:
+            type: string
+            example: nginx/1.18.0 (Ubuntu)
+      content:
+        text/plain:
+          examples:
+            Create Order - Success:
+              value: "{\n \"success\": true,\n \"data\": {\n\t\t\"orderId\":\"1234\",\n\t\t\"receiverWalletAddress\":\"0x12343232322223232323232323\",\n\t\t\"gasPriceWei\":\"1234200000\",\n\t\t\"gasUseEstimate\":\"70000\",\n\t\t\"quote\":\"1112233\",\n\t},\n\t\"error\": {}\n}"
+    '404':
+      description: Create Order - 404
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 404
+                  message:
+                    type: string
+                    example: Bank details are not found for the user
+              success:
+                type: boolean
+                example: false
+          examples:
+            Create Order - 404:
+              value:
+                error:
+                  code: 404
+                  message: Bank details are not found for the user
+                success: false

@@ -1,0 +1,129 @@
+post:
+  tags:
+    - Offramp Quotation
+  summary: Quotation By Fiat Amount
+  description: Quotation By Fiat Amount
+  operationId: quotationByFiatAmount
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            chainId:
+              type: number
+              example: 137
+            fiatCurrency:
+              type: string
+              example: inr
+            sellTokenAddress:
+              type: string
+              example: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+            sellTokenAmount:
+              type: number
+              example: 100
+            sellTokenSymbol:
+              type: string
+              example: USDC
+            senderAddress:
+              type: string
+              example: '0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC'
+        examples:
+          Quotation By Fiat Amount:
+            value:
+              chainId: 80001
+              fiatAmount: 100
+              fiatCurrency: inr
+              sellTokenAddress: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'
+              sellTokenSymbol: WMATIC
+              senderAddress: '0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC'
+          Quotation by crypto amount:
+            value:
+              chainId: 137
+              fiatCurrency: inr
+              sellTokenAddress: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+              sellTokenAmount: 100
+              sellTokenSymbol: USDC
+              senderAddress: '0xCdF10Bc7a1fAE391ff18F4C220ACe912547971cC'
+  responses:
+    '200':
+      description: Quotation By Fiat Amount - Success / Quotation by crypto amount
+      headers:
+        Connection:
+          schema:
+            type: string
+            example: keep-alive
+        Content-Length:
+          schema:
+            type: string
+            example: '191'
+        Date:
+          schema:
+            type: string
+            example: Fri, 25 Nov 2022 10:59:40 GMT
+        Server:
+          schema:
+            type: string
+            example: nginx/1.18.0 (Ubuntu)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  conversionRate:
+                    type: string
+                    example: '82.21'
+                  fiatAmount:
+                    type: number
+                    example: 100
+                  fiatCurrency:
+                    type: string
+                    example: inr
+                  gasFee:
+                    type: number
+                    example: 7
+                  sellTokens:
+                    type: string
+                    example: '1.234'
+                  transactionFee:
+                    type: number
+                    example: 3
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            Quotation By Fiat Amount - Success:
+              value:
+                data:
+                  conversionRate: '82.21'
+                  fiatAmount: 100
+                  fiatCurrency: inr
+                  gasFee: 7
+                  sellTokens: '1.234'
+                  transactionFee: 3
+                error: {}
+                success: true
+            Quotation by crypto amount:
+              value:
+                data:
+                  conversionRate: '84.449002'
+                  fiatAmount: 8444.90016171818
+                  fiatCurrency: inr
+                  gasFee: 0.211281588
+                  sellTokens: '100.000000'
+                  transactionFee: 0
+                error: {}
+                success: true

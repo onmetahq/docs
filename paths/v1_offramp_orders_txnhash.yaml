@@ -1,0 +1,61 @@
+post:
+  tags:
+    - Offramp orders
+  summary: Update Transaction Hash
+  description: Update Transaction Hash
+  operationId: updateTransactionHash
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            orderId:
+              type: string
+              example: 63108f7fc2f9dec3b1dd5743
+            txnHash:
+              type: string
+              example: >-
+                0xe01d9c4c55376334618f53e729b65a79ca531ea33a81f465373dd969e8ebcfc1
+        examples:
+          Update Transaction Hash:
+            value:
+              orderId: 63108f7fc2f9dec3b1dd5743
+              txnHash: >-
+                0xe01d9c4c55376334618f53e729b65a79ca531ea33a81f465373dd969e8ebcfc1
+  responses:
+    '200':
+      description: ''
+    '409':
+      description: Update Transaction Hash - 409
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 409
+                  message:
+                    type: string
+                    example: Duplicate transaction hash
+              success:
+                type: boolean
+                example: false
+          examples:
+            Update Transaction Hash - 409:
+              value:
+                error:
+                  code: 409
+                  message: Duplicate transaction hash
+                success: false

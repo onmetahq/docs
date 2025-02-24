@@ -1,0 +1,76 @@
+post:
+  tags:
+    - Onramp Api
+    - Orders
+  summary: Update UTR
+  description: Update UTR
+  operationId: updateUtr
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            orderId:
+              type: string
+              example: 628234ad5ea94d20f76ed6bd
+            utr:
+              type: string
+              example: 213456789096ASDF
+        examples:
+          Update UTR:
+            value:
+              orderId: 628234ad5ea94d20f76ed6bd
+              utr: 213456789096ASDF
+  responses:
+    '200':
+      description: Update UTR - Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            Update UTR - Success:
+              value:
+                error: {}
+                success: true
+    '403':
+      description: Update UTR - Invalid UTR
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 403
+                  message:
+                    type: string
+                    example: Invalid UTR
+              success:
+                type: boolean
+                example: false
+          examples:
+            Update UTR - Invalid UTR:
+              value:
+                error:
+                  code: 403
+                  message: Invalid UTR
+                success: false
