@@ -1589,8 +1589,6 @@ tags:
       authorization.
   - name: Offramp API
     description: Offramp API
-  - name: Webhooks
-    description: Webhooks
   - name:  Tokens
     description: Fetch available token list.
   - name:  Token Quotation
@@ -1697,8 +1695,8 @@ paths:
     $ref: paths/v1_orders_chain_limits.yaml
   /v1/orders/invoice/{order_id}:
     $ref: paths/v1_orders_invoice_{order_id}.yaml
-  /:
-    $ref: paths.yaml
+  /webhooks:
+    $ref: paths/v1_webhooks.yaml
   /v1/offramp/orders/create:
     $ref: paths/v1_offramp_orders_create.yaml
   /v1/offramp/orders/status:
