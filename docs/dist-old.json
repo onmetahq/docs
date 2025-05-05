@@ -3,7 +3,7 @@
   "info": {
     "title": "Introduction",
     "description": "Onmeta provides the underlying infrastructure that allows DeFi companies,\nWeb3 Gaming companies, NFT marketplaces & other Dapps to allow their end\nusers to exchange fiat currency for crypto tokens and crypto tokens for fiat\ncurrency.\n",
-    "version": "",
+    "version": "1.0.0",
     "contact": {},
     "x-logo": {
       "url": "https://platform.onmeta.in/_next/static/media/onmetaLogoBlack.4df0e893.svg",
@@ -12,42 +12,17 @@
   },
   "servers": [
     {
-      "url": "https://stg.platform.onmeta.in",
-      "description": "Staging"
-    },
-    {
-      "url": "https://api.platform.onmeta.in",
-      "description": "Production"
+      "url": "stg.platform.onmeta.in"
     }
   ],
   "tags": [
     {
       "name": "Introduction",
-      "description": "Home Page\n> On/Offramp ![Intro](images/intro-01.webp)\n\n> User Flow ![Flow](images/flow-01.png)\n\n\n# Integration supported.\nWe support the following integration methods for our services i.e. both On and Off Ramp.\n\n- Widget Integration\n- API Integration\nIn this document we will be discussing in detail the steps needed for widget integration in test module and then how to take the widget live. Before we dive into the integration subject, we will quickly highlight the key functionalities of our product in the following two sections.\n\n# Fiat Currency Supported\n  1. INR\n  1. PHP\n\n# Supported Blockchain Networks\n  Builders' building any dApp on our supported blockchain networks can integrate Onmeta to easily On/Off Ramp their users. Our solution is curated for Crypto wallets, Gaming dApps, NFT Marketplaces, DeFi platforms, Crypto Exchanges.\n  1. Polygon\n  1. Binance Smart Chain\n  1. Ethereum\n  1. Arbitrum\n  1. Solana  \n  1. Avalanche\n  1. TON\n  1. Base\n  1. Hedera\n  1. Ronin \n  1. Immutable \n  1. DFK \n  1. Gnosis\n  1. zkEVM\n  1. Tron\n  1. Fantom \n  1. Optimism \n\n# Customizations Possible for Widget Integration.\n  In the widget there are a list of customizations that we allow that you can execute through your dashboard:\n\n  1. You can choose to have either On ramp or Off ramp or both\n  1. You can choose to use Onmeta's KYC module or integrate with your own KYC \n  1. You can choose to customize the fiat currencies and tokens that list in your widget\n  1. You can choose whether the user has to go through an email verification in our widget or not by choosing whether to pass the email ID of the user or not\n  1. You can choose the payment channels that you would like to use\n  1. You can choose the color theme of the widget from light and dark [WIP]\n"
+      "description": "Home Page\n> On/Offramp ![Intro](https://onmetahq.github.io/docs/images/intro-01.webp)\n\n> User Flow ![Flow](https://onmetahq.github.io/docs/images/flow-01.png)\n\n\n# Integration supported.\nWe support the following integration methods for our services i.e. both On and Off Ramp.\n\n- Widget Integration\n- API Integration\nIn this document we will be discussing in detail the steps needed for widget integration in test module and then how to take the widget live. Before we dive into the integration subject, we will quickly highlight the key functionalities of our product in the following two sections.\n\n# Fiat Currency Supported\n  1. INR\n  1. PHP\n\n# Supported Blockchain Networks\n  Builders' building any dApp on our supported blockchain networks can integrate Onmeta to easily On/Off Ramp their users. Our solution is curated for Crypto wallets, Gaming dApps, NFT Marketplaces, DeFi platforms, Crypto Exchanges.\n  1. Polygon\n  1. Binance Smart Chain\n  1. Ethereum\n  1. Arbitrum\n  1. Solana  \n  1. Avalanche\n  1. TON\n  1. Base\n  1. Hedera\n  1. Ronin \n  1. Immutable \n  1. DFK \n  1. Gnosis\n  1. zkEVM\n  1. Tron\n  1. Fantom \n  1. Optimism \n\n# Customizations Possible for Widget Integration.\n  In the widget there are a list of customizations that we allow that you can execute through your dashboard:\n\n  1. You can choose to have either On ramp or Off ramp or both\n  1. You can choose to use Onmeta's KYC module or integrate with your own KYC \n  1. You can choose to customize the fiat currencies and tokens that list in your widget\n  1. You can choose whether the user has to go through an email verification in our widget or not by choosing whether to pass the email ID of the user or not\n  1. You can choose the payment channels that you would like to use\n  1. You can choose the color theme of the widget from light and dark [WIP]\n"
     },
     {
-      "name": "Widget Intro",
-      "description": "Onmeta Widget Integration\n# Prerequesite\n  To get started with the widget integration and also to avail the above customisations you need to register yourselves in our Staging Dashboard. Follow the steps below to setup your account in our dashboard:\n  \n> ![API Key flow](images/widget-01.png)\n\n# Setting up with Onmeta\n1. Go to the link to register in our dashboard. Enter your email address, password (at least 8 characters long, containing at least one number, one lowercase, and one uppercase letter), validate captcha, and click on “Register” to proceed to the next step \n2. Enter the OTP received on the email address provided, and click on “Submit OTP” to complete the registration. Note: Please check the spam folder, in case you don’t find the OTP Verification email in your inbox\n3. Upon successful verification, you will be redirected to Partner Login Page. Please enter your registered email address and password and click on “Login” to view the dashboard.           \n\n1. Register\n> ![Register page](images/dash-01.png)\n\n2. Home Page\n> ![Home page](images/dash-04.png)\n\n3 API Key\n> ![API key](images/dash-03.png)\n\n4. Token selection:\n> ![Register page](images/dash-06.png)\n\n# Testing Information\n\n    Do not make any payment on staging environment, enter a random (unique) number as UTR and proceed \n    Quotation will be calculated according to the production, however, we will be transferring only 0.01 WMATIC at once to the receiver’s wallet address in the staging environment.\n    Even for Offramp, quotation shown and actual number of tokens that needs to be sent are different. We take only 0.01 WMATIC and there will be no fiat deposit.\n"
-    },
-    {
-      "name": "Widget Creation",
-      "description": "Given below are the integration steps to embed the widget in your website.\n# Web Widget integration\nWeb Widget integration involves the inclusion of three HTML tag.\n\n1.JS File \n```\n<!-- Add script in head -->\n<script src=\"https://stg.platform.onmeta.in/onmeta-sdk.js\"></script>  \n```\n\n2.Widget Location\n```\n<!-- set the id tag to widget -->\n<div id=\"widget\"></div>\n```\n\n### Parameters\n\n| Parameter           | Sample Value             | Remarks                                                                 |\n|---------------------|--------------------------|-------------------------------------------------------------------------|\n| `elementId`         | `\"widget\"`               | **Mandatory**, should be an id of an HTML element.                     |\n| `apiKey`            | `\"{api_key}\"`            | **Mandatory**, obtain from dashboard post-registration.               |\n| `environment`       | `\"staging\"`              | `\"staging\"` for test, `\"production\"` for live.                         |\n| `fiatType`          | `\"inr\"`                  | *Optional*, fiat currency: `\"inr\"` or `\"php\"`.                         |\n| `walletAddress`     | `\"0xEc...DBB6E\"`         | *Optional*, target wallet for token delivery.                          |\n| `fiatAmount`        | `100`                    | *Optional*, fiat amount for purchase.                                  |\n| `userEmail`         | `\"test@test.com\"`        | *Optional*, user’s email.                                              |\n| `chainId`           | `\"80001\"`                | *Optional*, blockchain ID (e.g., 80001 for `polygon testnet`).         |\n| `tokenAddress`      | `\"0xEc...DBB6E\"`         | *Optional*, token address (can use with `chainId` or `tokenSymbol`).   |\n| `tokenSymbol`       | `\"USDT\"`                 | *Optional*, token symbol (as per CoinGecko or CoinMarketCap).          |\n| `metaData`          | JSON string              | *Optional*, key-value pairs (strings only), must be stringified JSON.  |\n| `successRedirectUrl`| `\"https://www.sample.net\"` | *Optional*, redirect on success. Must start with `http` or `https`.  |\n| `failureRedirectUrl`| `\"https://www.sample.net\"` | *Optional*, redirect on failure. Must start with `http` or `https`.  |\n\n\n## Sample JS code\n\n```js\n<script >\n    let createWidget = new onMetaWidget({\n        // (It should be an id of an element not a class) which is set in step 2 above\n        elementId: \"widget\", // Mandatory\n        apiKey: \"{api_key}\", // Mandatory\n        environment: \"staging\" //Mandatory , \"production\" for Prod\n        walletAddress: \"0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E\", // Optional\n        fiatAmount: 100, // Optional (If passed then minimum amount is 100 inr)\n        userEmail: \"test@test.com\", // Optional (if passed user don't have to register in meta platform)\n        chainId: \"80001\", // Optional (it should be passed along with the tokenAddress to show a particular token to the user)\n        tokenAddress: \"0xEcc24eab0fb83Ef0c536b35C44C578F750FDBB6E\", // Optional\n        metaData: {\"userID\" : \"ABCDXXX\", \"userName\" : \"user\"} // Optional\n        successRedirectUrl : \"https://www.sample.net\", // Optional\n        failureRedirectUrl : \"https://www.sample.net\", // Optional\n    });\n    createWidget.init(); // it will initialize the widget inside the particular div element\n    createWidget.on(eventType, callbackFn); // this method will listen to the events of the widget\n</script>\n```\n\n**Note:**\n By default widget will be initialised with OnRamp functionalities only. \n And only INR 100 is the valid amount for order creation in staging and Mumbai Matic is the only token supported for now to test the end to end onramp flow .\n\n\nWidget initialisation happens when you call  **createWidget.init();**   and all the respective events are notified back to the parent and once can handle event based actions respectively by passing the callbackFn names to the events like this **createWidget.on(eventType, callbackFn);**\n\n**callbackFn** - Its the function you have to pass along with the eventType. This function will get called when the event is fired.\n\n## Widget creation with React Native \n\nDefine two variables one for html content and one for javascript content \n\n```js\n  import {View, StyleSheet, Text, Linking} from 'react-native';\n  import WebView from 'react-native-webview';\n  export default function App() {\n    const onRampHTMLCode = `\n    <html>\n    <head>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n    <script src=\"https://stg.platform.onmeta.in/onmeta-sdk.js\" type=\"text/javascript\"></script>\n    </head>\n    <body>\n    <div id=\"widget\"> </div>\n    <script>\n    let createWidget=new onMetaWidget({\n      elementId:\"widget\",\n      environment: \"staging\", //Mandatory , \"production\" for Prod\n      apiKey:\"api_key\",  //update your api key here\n      userEmail:\"sample@gmail.com\",\n      isAndroid:\"enabled\", \n    })\n    createWidget.init();\n    createWidget.on(\"ACTION_EVENTS\",(data)=>{window.ReactNativeWebView.postMessage(JSON.stringify(data))}) \n    </script>\n    </body>\n    </html>\n    `;\n    const onRampEvent = event => {\n      const eventData = JSON.parse(event?.nativeEvent?.data);\n      if (eventData?.data?.type === 'UPI_FAST') {\n        void Linking.openURL(eventData.data.link);\n      }\n    };\n    return (\n      <View style={styles.container}>\n        <Text>Onmeta</Text>\n        <WebView\n          originWhitelist={['*']}\n          mixedContentMode=\"compatibility\"\n          source={{html: onRampHTMLCode}}\n          renderLoading={() => {\n            return <Text>Loading.......</Text>;\n          }}\n          startInLoadingState={true}\n          allowsBackForwardNavigationGestures\n          scalesPageToFit={true}\n          javaScriptEnabled={true}\n          mediaPlaybackRequiresUserAction={true}\n          domStorageEnabled={true}\n          onMessage={event => {\n            onRampEvent(event);\n          }}></WebView>\n      </View>\n    );\n  }\n```\n\n## Events\n\nBelow are the eventTypes and its description.\n\n| Event                  | Description                                                                 |\n|------------------------|-----------------------------------------------------------------------------|\n| `ALL_EVENTS`           | Listens to **all events** triggered by the widget and invokes the callback. |\n| `SUCCESS`              | Listens to the **success** event when a transaction is completed successfully. |\n| `FAILED`               | Listens to the **failed** event when a transaction fails.                    |\n| `ORDER_EVENTS`         | Listens to **all order-related** events.                                    |\n| `ORDER_COMPLETED_EVENTS`| Listens to events related to **order completion**.                          |\n| `ACTION_EVENTS`        | Listens to **action-based** events.  \n\n\n\n**Note:**\n\nBelow is the validation for UTR length , on staging use any random character with below validation.\n| **Pyament**            | **UTR length** |\n|------------------------|-----------------------------------------------------------------------------|\n|`UPI Payment`  |      12 character Numbers |\n|`IMPS payment` |    12-16 character Numbers    |\n|`NEFT payment` |   16-22 character alphanumeric |\n\n# Customizing Widget\n  Since widget has optional parameters that can be set during initialisation, let's see what are parameters that can be configured with it and how to enable OffRamp functionality as well.\n\n  **Note:**\n  By Default widget will be initialised with Onramp feature.\n  And Default fiat is only INR , for PHP contact our sales team to enable it. and from widget initialize fiatType:php for PHP \n\n  1. Offramp only.\n  Offramp can be enabled by setting the flag to offRamp: **enabled** as shown in below example.\n\n  ```js\n\n  <script>\n    let createWidget = new onMetaWidget({\n      elementId: \"widget\", // Mandatory (It should be an id of an element not a class)\n      apiKey: \"api_key\", // Mandatory\n      userEmail: \"test@test.com\", // Optional (if passed user don't have to register in meta platform)\n      chainId: \"80001\", // Optional (it should be passed along with the tokenAddress to show a particular token to the user)\n      tokenAddress: \"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\", // Optional\n      offRamp: \"enabled\", // to enable offRamp feature\n      onRamp: \"disabled\" // to disable onRamp feature\n    });\n    createWidget.init(); // it will initialize the widget inside the particular div element\n  </script>\n  ```\n\n  2. OffRamp and OnRamp\n    Both on and off ramp can be enabled by setting respective flags to a value as **enabled** as shown below.\n  ```js\n  <script>\n    let createWidget = new onMetaWidget({\n      elementId: \"widget\", // Mandatory (It should be an id of an element not a class)\n      apiKey: \"api_key\", // Mandatory\n      userEmail: \"test@test.com\", // Optional (if passed user don't have to register in meta platform)\n      chainId: \"80001\", // Optional (it should be passed along with the tokenAddress to show a particular token to the user)\n      tokenAddress: \"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\", // Optional\n      offRamp: \"enabled\", // to enable offRamp feature\n      onRamp: \"enabled\" // to enable onRamp feature\n    });\n    createWidget.init(); // it will initialize the widget inside the particular div element\n  </script>\n\n  ```\n\n  3. To set default input type as crypto in offramp widget\n\n  ```js\n    sellCryptoType: \"coins\" //initialise this parameter within widget object to get crypto as input by default\n  ```\n\n# Embedding widget\n\nOnce you are ready with the widget configuration you can embed the code within your HTML web app and start using it instantly.\n\nSample code shown below on how to embed the widget within a HTML page.\n\n**Note:**\nFor demo setup use the below script tag only.\n\n### Things to verify : \n  Test  api key from staging dashboard can be used with below sample code.\n  \n  Live api key from live dashboard can be used with live SDK so change the script tag url as shown in above note.\n\n  ```html\n  <!DOCTYPE html>\n  <html lang=\"en\">\n    <head>\n      <meta charset=\"UTF-8\" />\n      <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n      <title>Document</title>\n      <!-- Add script in head -->\n      <script src=\"https://stg.platform.onmeta.in/onmeta-sdk.js\"></script>\n    </head>\n    <body>\n      <div id=\"widget\"></div>\n      <script>\n        let createWidget = new onMetaWidget({\n          elementId: \"widget\",\n          apiKey: \"test_api_key\",\n        });\n        createWidget.init();\n        createWidget.on(\"ALL_EVENTS\", (data) => console.log(\"ALL_EVENTS --> \",data))    \n    </script>\n    </body>\n  </html>\n  ```\n\n  ### Events from Widget Onramp:\n\n  The widget events gives you data to take action on and utilise it with callBack functions and few of the responses are as below. Here orderID is unique for that transaction.\n\n  **Order Created waiting for UTR.**\n\n  ```json\n    {\n        \"eventCategory\": \"order\",\n        \"paymentStatus\": \"pending\",\n        \"cryptoSwap\": \"pending\",\n        \"orderId\": \"6346bf17af14a27251aa2ca8\",\n        \"eventType\": \"orderCreated\",\n        \"paymentType\": \"buy\",\n        \"order\": {\n            \"fiat\": 100,\n            \"currency\": \"INR\",\n            \"utr\": \"\",\n            \"receiverWalletAddress\": \"0x4338C380dF304cC6637BC72e3a6C00\",\n            \"buyTokenSymbol\": \"USDC\",\n            \"buyTokenAddress\": \"0x2791bca1f2de4661ed88a30c99a7a9449aa84174\",\n            \"orderId\": \"6346bf17af14a27251aa2ca8\",\n            \"createdAt\": \"2021-10-12T13:20:23.289Z\",\n            \"chainId\": 80001,\n            \"customer\": {\n                \"email\": \"test@onmeta.in\"\n            }\n        }\n    }\n  ```\n\n  **UTR captured.**\n  ```json\n    {\n      \"eventCategory\": \"order\",\n      \"paymentStatus\": \"utrCaptured\",\n      \"cryptoSwap\": \"pending\",\n      \"orderId\": \"6346bf17af143323a27251aa2ca8\",\n      \"paymentType\": \"buy\",\n      \"order\": {\n          \"fiat\": 100,\n          \"currency\": \"INR\",\n          \"utr\": \"228554992598\",\n          \"receiverWalletAddress\": \"0x432432d8C3805cfbcC6637BC72e3a6C00\",\n          \"buyTokenSymbol\": \"USDC\",\n          \"buyTokenAddress\": \"0x2791bca1f2de4661ed88a30c99a7a9449aa84174\",\n          \"orderId\": \"6346bf17af143323a27251aa2ca8\",\n          \"createdAt\": \"2021-10-12T13:20:23.289Z\",\n          \"chainId\": 80001,\n          \"customer\": {\n              \"email\": \"test@onmeta.in\"\n          }\n      }\n    }\n  ```\n\n  **UTR verified and Crypto transfer Initiated**\n\n  ```json\n      {\n        \"orderId\": \"6346bf17af143323a27251aa2ca8\",\n        \"eventCategory\": \"order\",\n        \"paymentStatus\": \"success\",\n        \"cryptoSwap\": \"transfering\",\n        \"paymentType\": \"buy\",\n        \"order\": {\n            \"fiat\": 100,\n            \"currency\": \"INR\",\n            \"utr\": \"228554992598\",\n            \"receiverWalletAddress\": \"0xe424d8C3805cfbcC6637BC72e3a6C00\",\n            \"buyTokenSymbol\": \"USDC\",\n            \"buyTokenAddress\": \"0x2791bca1f2de4661ed88a30c99a7a9449aa84174\",\n            \"orderId\": \"6346bf17af143323a27251aa2ca8\",\n            \"createdAt\": \"2021-10-12T13:20:23.289Z\",\n            \"chainId\": 80001,\n            \"customer\": {\n                \"email\": \"test@onmeta.in\"\n            }\n        }\n      }\n  ```\n\n  **Crypto transfer success and transaction success.**\n  ```json\n      {\n        \"orderId\": \"6346bf17af143323a27251aa2ca8\",\n        \"eventCategory\": \"order\",\n        \"paymentStatus\": \"success\",\n        \"cryptoSwap\": \"success\",\n        \"paymentType\": \"buy\",\n        \"order\": {\n            \"fiat\": 100,\n            \"currency\": \"INR\",\n            \"utr\": \"228554992598\",\n            \"receiverWalletAddress\": \"0xe424d8C3805cfbcC6637BC72e3a6C00\",\n            \"buyTokenSymbol\": \"USDC\",\n            \"buyTokenAddress\": \"0x2791bca1f2de4661ed88a30c99a7a9449aa84174\",\n            \"orderId\": \"6346bf17af143323a27251aa2ca8\",\n            \"createdAt\": \"2021-10-12T13:20:23.289Z\",\n            \"chainId\": 80001,\n            \"customer\": {\n                \"email\": \"test@onmeta.in\"\n            }\n        }\n      }\n  ```\n\n  **Amount mismatch failure event  - paid amount and order created amount are different.**\n\n  ```json\n      {\n        \"orderId\": \"63d8cada3ce50f608b194bff\",\n        \"eventCategory\": \"order\",\n        \"paymentStatus\": \"failed\",\n        \"cryptoSwap\": \"failed\",\n        \"paymentType\": \"buy\",\n        \"order\": {\n            \"fiat\": 100,\n            \"currency\": \"INR\",\n            \"utr\": \"228554992598\",\n            \"receiverWalletAddress\": \"0xe424d8C3805cfbcC6637BC72e3a6C00\",\n            \"buyTokenSymbol\": \"USDC\",\n            \"buyTokenAddress\": \"0x2791bca1f2de4661ed88a30c99a7a9449aa84174\",\n            \"orderId\": \"6346bf17af143323a27251aa2ca8\",\n            \"createdAt\": \"2021-10-12T13:20:23.289Z\",\n            \"chainId\": 80001,\n            \"customer\": {\n                \"email\": \"test@onmeta.inn\"\n            }\n        }\n    }\n  ```\n\n  ### Events from Widget Offramp:\n\n  **Order creation event**\n  ```json\n    {\n        eventCategory: 'order', \n        paymentStatus: 'pending', \n        cryptoSwap: 'pending',\n        paymentType: 'sell'\n    }\n  ```\n  **In progress event**\n  ```json\n    {\n        eventCategory: 'order', \n        paymentStatus: 'pending', \n        cryptoSwap: 'success',\n        paymentType: 'sell'\n    }\n  ```\n  **Success event**\n  ```json\n  {\n    eventCategory: 'order', \n    paymentStatus: 'success', \n    cryptoSwap: 'success',\n    paymentType: 'sell'\n  }\n  ```\n\n  Copy the above snippet to a file in your local machine and save it as **onmeta_widget.html** and update the **apiKey: \"{demo_api_key}\"** with the key you received in the demo dashboard. After this open this html file in browser and you will see the widget with the default tokens and start using it.\n\n  **Note:**\n  Don't make any money transfer for testing, enter random number as UTR and it will be processed.\n  * UTR is 12 digit number for UPI and IMPS payment options\n  and 16 digit alphanumeric for NEFT payment.\n\n# Production checklist\n\nThings to check before moving to production.\n\n**The script tag should be changed.**\nKindly contact our sales team to get the details.\n\n**Api key needs to be changed to production api key**\n```json\n      apiKey: \"api_key\", //production key from dashboard - client-id.\n```\n\nMake sure you use the **Mainnet** **chainID** and **tokenAddress** for the required tokens if you set from widget code, or else just select required tokens from the dashboard page.\n\n\n**Note:** \nSample values for Binance Smart Chain (BSC) mainnet chainID is 56 and USDT token address is as shown below. To find out Mainnet chain ID check this <a href=https://chainlist.org target=\"_blank\"/>link</a>. \n\n\n```json\n  let createWidget = new onMetaWidget({\n    chainId: \"56\", // Optional (it should be passed along with the tokenAddress to show a particular token to the user)\n    tokenAddress: \"0x55d398326f99059ff775485246999027b3197955\", // Optional\n  });\n```\n\nFor widget also we send webhook event data to call back url's registered in dashboard, kindly refer to webhook documentaion for onramp and offramp details.\n\nFor KYC kindly allow below permission in the iOS webview implementation code.   **\"allowsInlineMediaPlayback\": true\"** \n\n# Steps to integrate custodial wallet (Offramp)\n\nClient can integrate custodial wallets for offramp orders in Onmeta widget following the steps below :\n\n**Note:** Make sure you have set widget parameter metamask=disabled so that custodial wallet flow is triggered.\n\n**1.Generate Sell Quote by entering fiat amount**\n\n<img src=\"images/cust_off_01.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"300\" height=\"300\" /> \n\n**2.Complete KYC check**\n\n<img src=\"images/cust_off_02.png\" style=\"display: block; margin: 0 auto;\" alt=\"Alt Text\" width=\"300\" height=\"300\" /> \n\n**3. Fetch Bank Details**\n \n<img src=\"images/cust_off_03.png\" style=\"display: block; margin: 0 auto;\" alt=\"Alt Text\" width=\"300\" height=\"300\" />\n\n**4. OTP API **\n    Onmeta will send below request body to client's otp-api endpoint to send otp to user email.\n    Client has to expose otp endpoint for onmeta.\n\n  ```json\n\n    {\n        type: \"onmetaSell\",\n        email: userEmail,\n    }\n\n  ```\n  **5. User enters OTP (stores it locally)**\n\n  <img src=\"images/cust_off_04.png\" style=\"display: block; margin: 0 auto;\" alt=\"Alt Text\" width=\"300\" height=\"300\" />\n\n  **6. Select bank account**\n\n  <img src=\"images/cust_off_05.png\" style=\"display: block; margin: 0 auto;\" alt=\"Alt Text\" width=\"300\" height=\"300\" />\n\n  **7.Create Order**\n\n  On clicking the confirm button above order will be created.\n\n\n  **8.Transfer API**\n\n  To get the crypto in users wallet send below request body to users withdrawal endpoint, \n  client has to expose transfer api endpoint for onmeta to make **transfer request.**\n\n  ```json\n      {\n          \"email\":\"test@gmail.com\",\n          \"wAddress\":\"0x23134131\",\n          \"otp\":\"1234\",\n          \"receiverWalletAddress\": \"receiverWalletAddress\",\n          \"token\":\"10.6\",\n          \"orderDetails\": {\n              \"orderId\": 12345,\n              \"fiat\": 100,\n              \"tokenAddress\":\"0xeeeeeeeeeeee\", //sell token address\n              \"metaData\": \"sample\" //optional if passed during widget init\n          }\n      }  \n  ```\n\n  **Note:**\n  If you pass any metaData for widget initialisation that will forwarded to you from above body within orderDetails filed.\n\n\n  Below is the expected response for success case of transfer API.\n\n  ```json\n      {\n          \"txnHash\": \"0x8a2585bb8b2c5bc4......0cf422b62e3a0331c0b7\",\n          \"orderId\": \"646dd7248...7bf5d2c\"\n      }\n  ```\n\n  Below is the expected reponse for failure case of transfer API. Set your error inside code filed to show in widget.\n  \n  ```json\n  {\n    \"error\": {\n        \"code\":\"INSUFFICIANT_FUNDS\"\n      }\n  }\n  ```\n  **Withdrwaing Tokens**\n\n\n  <img src=\"images/cust_off_06.png\" alt=\"Alt Text\" style=\"display: block; margin: 0 auto;\" width=\"300\" height=\"300\" />\n  \n\n  **Transaction success**\n    \n  <img src=\"images/cust_off_07.png\" alt=\"Alt Text\" style=\"display: block; margin: 0 auto;\" width=\"300\" height=\"300\" />\n\n  # Checkout flow - Onramp\n\n  To open payment page directly with widget and to skip the quotation page, follow below steps.\n\n  1. Create order via api and keep the orderID which you have received in api response.\n  2. Initialize widget with orderID received in step 2.\n\n  ### Step 1:\n\n  ```js\n    curl --location --request POST 'https://stg.api.onmeta.in/v1/orders/create' \\\n    --header 'Accept: application/json' \\\n    --header 'x-api-key: string' \\\n    --data-raw '{\"buyTokenSymbol\":\"string\",\"chainId\":\"string\",\"fiatCurrency\":\"string\",\"fiatAmount\":\"string\",\"buyTokenAddress\":\"string\",\"receiverAddress\":\"string\"}'\n  ``` \n\n  **Note:** \n  You need to have auth token to call create order api as above else you will receive 401 Unauthorized error.\n\n\n  Response :\n  ```json\n    {\n        \"success\": true,\n        \"data\": {\n            \"orderId\": \"989073230\",\n            \"pgOrderId\": \"1212121\",\n            \"upiCode\": \"\",\n            \"redirect_actions\": {\n                \"qr_checkout_string\": \"...\",\n                \"deepLinks\": [\n                    {\n                        \"name\": \"Phonepe\",\n                        \"url\": \"...\",\n                        \"imageUrl\": \"https://ik.imagekit.io/z3vwasz5xwz/Meta_widget/Payment_icons/Phonepe_53UkYwiQw.svg\"\n                    },\n                    {\n                        \"name\": \"Google Pay\",\n                        \"url\": \"....\",\n                        \"imageUrl\": \"https://ik.imagekit.io/z3vwasz5xwz/Meta_widget/Payment_icons/gpay_cQIoYpPHF.svg\"\n                    },\n                    {\n                        \"name\": \"Paytm\",\n                        \"url\": \"...\",\n                        \"imageUrl\": \"https://ik.imagekit.io/z3vwasz5xwz/Meta_widget/Payment_icons/paytm_OWArcqFdy.svg\"\n                    },\n                    {\n                        \"name\": \"Others\",\n                        \"url\": \"..\",\n                        \"imageUrl\": \"https://ik.imagekit.io/z3vwasz5xwz/Meta_widget/Payment_icons/bhim_t366jHPDh.svg\"\n                    },\n                    {\n                        \"name\": \"QR\",\n                        \"url\": \"..\",\n                        \"imageUrl\": \"https://ik.imagekit.io/z3vwasz5xwz/Meta_widget/Payment_icons/bhim_t366jHPDh.svg\"\n                    }\n                ]\n            }\n        },\n        \"error\": {}\n    }\n  ```\n\n  ### Step 2: \n  ```js\n    <script src=\"https://stg.platform.onmeta.in/onmeta-sdk.js\"></script>\n      <div id=\"widget\"></div>\n\n      <script>\n            let createWidget = new onMetaWidget({\n              elementId: \"widget\",\n              apiKey: \"bujbw93003j4\",\n              userEmail: \"test@test.com\",\n              onRamp: \"enabled\",\n              fiatType: \"inr\",\n              fiatAmount: 100, //needs to be same as create order value\n              orderId: \"6496b1f3dbde72d010890d84\", // orderId from step 1\n              walletAddress: \"\", \n            });\n      </script>\n  ```\n\n  once you pass orderID to widget Initialisation params, it will fetch order details and load the widget with prefilled data and take user directly to payment page.\n\n\n  # SDK integration\n\n  ### React-Native SDK 🛠️\n\n  React native apps can make use of our sdk and integrate their apps with Onmeta seamlessly as below \n\n  ```\n    NPM package can be installed from here \n    https://www.npmjs.com/package/@onmeta/react-native-sdk\n\n    **Make sure you install the required dependency packages without fail\n  ```\n\n  follow the steps given below and integrate the On/Offramp widget within your app, below is the sample integration\n\n  ```js\n    import MetaWidget from \"@onmeta/react-native-sdk\";\n\n    const eventHandler = async (event, data) => {\n      switch (event) {\n        // example to open the upi apps\n        case \"upi-intent\": {\n          const Linkdata = await JSON.parse(data);\n          void Linking.openURL(Linkdata.link);\n        }\n        default: {\n          // Default code\n        }\n      }\n    };\n\n    <MetaWidget\n      queryParams={{\n        apiKey: \"*****MERCHANT_API_KEY********\",\n        environment: \"STAGING/PRODUCTION\",\n      }}\n      onEventHandler={eventHandler}\n    />;\n  ```\n\n  you can use the same config parameters mentioned in widget creation page to customize your widget. \n\n  Events will be received are as below \n\n  | EventName     | Description                                                                 |\n  |---------------|-----------------------------------------------------------------------------|\n  | order-created | Order created event (Success, Failed, Pending)                             |\n  | order-status  | Order status change event                                                  |\n  | order-event   | KYC redirect related event with redirect URL                               |\n  | utr-capture   | UTR\n\n  Sample event body will be as below\n\n  **Order created**\n\n  ```json\n  {\n    \"channelName\": \"ONMETA-CHANNEL-1699364767487-62481317\",\n    \"eventName\": \"order-created\",\n    \"data\": {\n      \"eventCategory\": \"order\",\n      \"paymentStatus\": \"pending\",\n      \"cryptoSwap\": \"pending\",\n      \"orderId\": \"654a3fc8c252b81cd384681e\",\n      \"eventType\": \"orderCreated\",\n      \"paymentType\": \"buy\"\n    },\n    \"userId\": null\n  }\n  ```\n\n  **UPI intent**\n\n  ```json\n  {\n        \"channelName\": \"ONMETA-CHANNEL-1699365314488-28596314\",\n        \"eventName\": \"upi-intent\",\n        \"data\": {\n                \"type\":\"UPI_FAST\",\n                \"link\":\"phonepe://pay?pa=merchant452915.augp@aubank&pn=Abhibha&am=100.00&cu=INR&tn=654a4219ccd3846846\",\n                \"name\":\"PhonePe\"\n            },\n        \"userId\": null\n    }\n  ```\n  **Text copy**\n\n  ```json\n  {\n      \"channelName\": \"ONMETA-CHANNEL-1699365860958-40579766\",\n      \"eventName\": \"text-copy\",\n      \"data\": {\n          \"detail\":{ \"text\":\"0991898392323\" }\n      },\n      \"userId\": null\n  }\n  ```\n\n  **utr-capture**\n  ```json\n  {\n    \"channelName\": \"ONMETA-CHANNEL-1699365860958-40579766\",\n    \"eventName\": \"utr-capture\",\n    \"data\": {\n        \"eventCategory\":\"order\",\n        \"paymentStatus\":\"utrCaptured\",\n        \"cryptoSwap\":\"pending\",\n        \"orderId\":\"654a43f8c252b81cd3846856\",\n        \"paymentType\":\"buy\"\n    },\n    \"userId\": null\n  }\n  ```\n\n  **Order status**\n\n  ```json\n      {\n          \"channelName\": \"ONMETA-CHANNEL-1699365860958-40579766\",\n          \"eventName\": \"order-status\",\n          \"data\": {\n              \"detail\": {\n                  \"eventCategory\": \"order\",\n                  \"paymentStatus\": \"pending\",\n                  \"cryptoSwap\": \"success\",\n                  \"paymentType\": \"sell\",\n                }\n          }\n      }\n  ```\n\n  **Order event**\n\n  ```json\n  {\n        \"channelName\": \"ONMETA-CHANNEL-1699365860958-40579766\",\n        \"eventName\": \"order-event\",\n        \"data\": {\n            \"detail\": { \n                \"type\": \"KYC-REDIRECT\", \n                \"link\": \"https://xyz.com\"\n          }\n        }\n    }\n  ```\n"
-    },
-    {
-      "name": "KYC with Widget",
-      "description": "Know Your Customer verification can be done with our widget itself let's see how it can be done.\n\n<img src=\"images/KYC_with_Widget_01.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"300\" height=\"300\" /> \n\n**Note:**\nThis feature is not available by default, if needed talk to our sales team.\n\n| Document     | Remarks                                                                 |\n|---------------|-----------------------------------------------------------------------------|\n|Income tax ID  |  PAN Card (India specific)\n|Address verification Document | Aadhaar card (India specific)\n| Selfie photo | Need to take selfie during verification\n\nLets see in the next section how to use above documents and enabel KYC within Widget.\n\n## KYC as separate widget\n\nKYC can be used as separate widget for verification purpose.\nTo use just KYC as separate widget you need to initialize the url as below format \n\n```html\n    https://stg.platform.onmeta.in/kyc/?apiKey=<your_apikey>\n```\n\nand rest of the steps are self explanatiory in the widget just follow the instructions. \nIf face is not matched with any of the Photo ID provided user account will go to manual KYC verification and it will be processed within 24hrs.\n\nAdditionally you can set success and failure re-direct url's in the widget url, \nhere is an example :\n\n```html\n  https://stg.platform.onmeta.in/kyc/?apiKey=<your_apikey>&successRedirectUrl=<your_success_url>&failureRedirectUrl=<your_failure_url>\n```\n\nAll webhook events for KYC can be captured as well, you need to setup callback url in dashboard as shown below\n\n<img src=\"images/KYC_Webhook.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"500\" height=\"300\" /> \n\nAnd you can refer to this page for webhook events and their detials \n"
-    },
-    {
-      "name": "How to find the UTR details?",
-      "description": "For UPI transactions:\nUPI transaction reference number are of 12 digits and the first digit for all UPI transactions made in year 2022 will be 2.\nFor example: 209905101992, 210203211993.\n\n## Phonepe\nOnce you have made a transaction via PhonePe, click on *View Details*.\nor After a successful transaction on PhonePe, click on Done.\nGo to history and select the particular transaction. UTR number (as shown in the screenshot) is the required UPI transaction ID.\n\n<img src=\"images/UTR-01.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"200\" height=\"300\" />\n\n## Google Pay\nUPI Transaction ID (as shown in the screenshot) is the correct UPI transaction ID\n<img src=\"images/UTR-02.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"200\" height=\"300\" />\n\n## Paytm\nOnce you have made a transaction via Paytm UPI, click on “View Details”\nor UPI Reference No. (as shown in the screenshot) is the correct UPI transaction ID\n\n<img src=\"images/UTR-03.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"200\" height=\"300\" />\n"
-    },
-    {
-      "name": "FAQ's",
-      "description": "## Developer FAQs\n**1. How much time it takes to integrate widget ?**\n\nit will take a maximum of 1 hour if clients have a clear idea of how they want to execute and have the following basics covered \n\nA functioning app\nList of tokens and blockchains to set up with\nKYC flow needed or not\nDesigns and logics for how clients want to act based on the widget events that Onmeta streams in webhook\n\n\n**2. How can we set up the list of tokens we want in our widget?**\n\nYou can set up the list of tokens that you want by using the “Search Coins” section of the Onmeta dashboard. \n\n**3. Does the widget have a default token list?**\n\nIf you don’t select any tokens then the default token list of the widget will appear. The tokens setup as default include the following - USDC, USDT, WBTC, WETH, PLOT, MATIC, PS1, UFARM, BNB, BOLT USDs\n\n**4. What is the chain ID of a blockchain?**\n\nChain ID is a symbol that is passed over a network during a handshake and allows nodes not to connect to the nodes of other networks\n\n**5. Where can we find the chain ID of different networks?**\n\nYou can find the different chain ID's here. \n\n**6. Where do we find the API keys?**\n\nYou can find the API keys inside the developer section of the Onmeta dashboard.\n<img src=\"images/dash-03.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"500\" height=\"300\" />\n\n**7. Do you provide a sandbox environment for testing?**\n\nYes we provide a staging environment to test the widget. You can access staging environment API keys by creating an account here. You can integrate the staging widget by using this documentation.\n\n**8. Do you have integration support?**\n\nYes, we support integration queries via WhatsApp and Telegram channels. You can also book Calendly meetings with our technical experts with a short notice.\n\n**9. Do you have go-live tech support?**\n\nYes, one of your technical experts verifies the integration done by clients for good practices and gives a thumbs up for going live. Our experts are also available for discussions and help immediately before going live.\n\n**10. How can customers reach out to you if there is a technical problem with their order?**\n\nWe have a live chat widget using which customers can raise queries to us. The live chat widget can be accessed by clicking the hamburger menu in the top right corner.\n\n<img src=\"images/FAQ-10.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"200\" height=\"300\" />\n\n**11. Is the widget customizable? What options do you provide?**\n\nOur widget is customizable for your needs in more ways than one. Following are some of the customizations that we provide and clients can choose based on their needs\n\n- Onramp or Offramp or Both\n- Choose to use the KYC in our widget or use your own KYC\n- Customized the list of exact tokens that you want\n- Option to “whitelist” end user emails so users don’t end up going through OTP verification every time they login\n- Option to initialize the widget with wallet address so that the customers don't need to type the same\n- Choose UPI or bank transfer option or both\n\n\n**12. How to customize whether I need Onramp or Offramp or both?**\n\nYou can check the \"Customizing widget\" section in the Onmeta Widget Integration documentation\n\n**13. How to initialize the widget with customers wallet address for the Onramp flow?**\n\nYou can initialize the widget with customers wallet address by passing an additional parameter in the widget script  called \"walletAddress\" with the address of the end users wallet\n\n**14. Do our customers need to go through your login module?**\n\nNo, you can customize so that your users don't have to login. You can initialize the widget with customers email address by passing an additional parameter in the widget script  called \"userEmail\" with the email address of the user\n\n**15. Do our customers need to go through your KYC module?**\n\nNot mandatory. By default we keep our KYC module turned off in the widget. If you feel the need to use our KYC module then reach out to us at tech@onmeta.in or ask us in the telegram or whatsapp channel that we created for the purpose of integration.\n\n**16. Who is your KYC partner?**\n\nWe currently use the KYC module of Hyperverge. We are happy to make an Introduction to them if you want to directly integrate with them.\n\n**17. What are the KYC checks that you do?**\n\nFor Indian Market: We verify the PAN, Aadhaar and do a face match of selfie and the photo from your PAN\n\n**18. Is your KYC real time?**\n\nYes we support real time KYC and it can be completed within a minute typically\n\n**19. What is the fallback if user KYC doesn’t go through?**\n\nYou or the end user can email us the KYC documents at support@onmeta.in and we will get your account verified manually\n\n**20. Is the user data safe with Onmeta?**\n\nYes, we have incorporated Industry standard security measures to protect the end users data.\n\n**21. How frequently your quote gets updated?**\n\nThe quote gets updated every 15 seconds or when the user changes the input\n\n**22. What user security measures do you have to prevent losses due to token value fluctuations?**\n\nWe have setup slippage fee limits in our transactions with the central and decentralized exchanges to limit the losses our customers might face due to market effects.\n\n**23. What is the slippage fee?**\n\nSlippage fee is the difference (in %) between the quantity of token we promise to give in the quote and the quantity of token that we eventually deliver to you. Our slippage fee is typically less than 0.5%\n\n**24. How much is the gas fee? Are you customizing the gas fees for different blockchains?**\n\nGas fee varies from chain to chain. It is calculated by using the combination of the gas price and the gas units needed to process the transaction. We fetch live gas price and gas units to enable fast transactions on your behalf.\n\n**25. Does Onmeta deduct TDS from end user? If so, how much?**\n\nWe deduct TDS only for offramp transactions. TDS is 1% based on the latest ruling by the government of India.\n\n**26. How can a seller reconcile the TDS Onmeta deducted on behalf of him?**\n\nWe will provide invoices for every offramp transaction made with Onmeta along with a yearly summary of the transactions with our platform.\n\n**27. What payment methods are supported? How can I customize the methods?**\n\nYou can find the payment methods that we support in different geographies and our default Onramp & Offramp commission here.\n\n**28. What is UTR?**\n\nUTR means Unique transaction reference. This is a number that the remittance bank account issues for the fiat amount that you transfer to us. It is typically present in the SMS confirmation that the bank sends for the transaction made by you. \n\n**29. Do you allow the reuse of the same UTR for a new order?**\n\nWe allow an user to place another order with the same UTR only if the order associated with the UTR is “Canceled”. Typically an order gets canceled if the amount mentioned by the user in the widget is different from the amount transferred. We allow this so the user is able to use the genuinely transferred money to place a fresh order.\n\n**30. Where can the users find UTR?**\n\nUnique Transaction Reference (UTR) is typically a 12 digit number for UPI transactions. This can be found in the SMS messages that users receive from their UPI providers.\n\n**31. Do you do validation of UTR entered?**\n\nWe currently validate if the UTR entered is in the valid UTR format for UPI transactions\n\n**32. What should users do if they enter a wrong UTR?**\n\nAfter entering the UTR, you would typically be waiting for the payment confirmation. In this screen there is an option reenter UTR and submit again.\n\n**33. Is the UTR case sensitive?**\n\nYes, UTR is case sensitive. Please make sure you enter the UTR in the same case as it is present in the SMS message.\n\n**34. What is Onmeta's average transaction processing time?**\n\nAverage time to process an order is less than 1 minutes. We do face certain delays from the blockchain in executing the transaction during peak hours but we are constantly evolving our product with best practices to give you the quickest possible transaction time.\n\n**35. What are the different payment states possible and their definition?**\n\n| Status             | Description                                                                                                                                       |\n|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|\n| `fiatPending`      | Yet to receive payment with that UTR                                                                                                              |\n| `fiatReceived`     | Fiat payment received, starting token movement                                                                                                    |\n| `orderReceived`    | Crypto transaction started                                                                                                                       |\n| `transferred`      | Tokens are moved to the receiver wallet address                                                                                                   |\n| `completed`        | There is at least 1 block confirmation in the blockchain after transferred state                                                                  |\n| `expired`          | Order which was in `fiatPending` state for too long will be moved to `expired` state. (This is still work in progress)                            |\n| `cancelled`        | When order amounts don't match, i.e., paid amount for that UTR and the amount requested in the order don't match; users can retry with same UTR  |\n| `refundInitiated`  | When payment is received from an invalid payment method (unverified UPI ID or bank account), the order will be moved to `refunding` state         |\n| `refunded`         | Once we refund the amount back to the source account, it will move to this refund complete step as `refunded`                                     |\n\n**36. What are the different payment related events in the widget? Where do I listen to these events?**\n\nWe stream order success and failure events. You can listen to these events by using the call back functions that get called when the event is fired. \n\n**37. What are the Offramp event states and their description ?**\n\n| Status             | Description                                                                                                                                       |\n|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|\n| `orderReceived`    | We received the order and it is under processing                                                                                                 |\n| `pending`          | Waiting for the tokens to be received in our wallet; for API requests, waiting for the transaction hash of the completed transfer               |\n| `refundInitiated`  | Mismatch in tokens received or quantity received, hence a refund of received tokens has been initiated                                           |\n| `refunded`         | Refund of received tokens has been completed                                                                                                     |\n| `fiatFailed`       | Fiat payment failed—reasons may include issues with the recipient’s bank account or other bank-related problems during payout                   |\n| `fiatPending`      | Fiat is yet to be transferred to the receiver’s bank account                                                                                     |\n| `completed`        | Order has been completed and funds have been successfully paid out to the receiver's bank account                                                |\n\n**38. How do we integrate Solana to our product.**\n\nOur tech stack will remain same no matter what chain we add , we want our users to make minimal changes to adopt new chains in their product , so to use Solana chain \nthe only change you need make is \n- For widget - enabled required Solana token from your dashboard and once its done refresh your widget page it should show in dropdown list.\n- For api you need to use ChainId 102 for staging and 101 for production , with respective Token Symbol and its Smart contract address and create the orders. \n\nsample api request for SOL token on staging environment is below\n\n**Note: Solana is non EVM chain hence its Wallet address will be different so kindly double check the wallet adderss so that it won't credit to wrong addres**\n\n\nSolana\n<img src=\"images/FAQ-38.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"500\" height=\"300\" /> \n\n**39. Bank account link status and their definitions.**\n\n| Status    | Remarks                                                                                                   |\n|-----------|-----------------------------------------------------------------------------------------------------------|\n| `Pending` | Pending state, validation is in progress.                                                                |\n| `Success` | Successfully linked bank account of the user.                                                            |\n| `Failed`  | Failed to link bank account due to wrong IFSC code, account number, or name mismatch.                    |\n\n**40. Minimum amount for each .**\n\n| Chain                                | Minimum Limit       | Maximum Limit        |\n|--------------------------------------|----------------------|-----------------------|\n| Ethereum                             | 2000 INR, 2000 PHP   | 500000 INR, 50000 PHP |\n| zkEVM, zkSyncEra                     | 1000 INR, 1000 PHP   | 500000 INR, 50000 PHP |\n| Polygon                              | 50 INR, 50 PHP       | 500000 INR, 50000 PHP |\n| Binance Smart Chain, Tron           | 500 INR, 500 PHP     | 500000 INR, 50000 PHP |\n| Avalanche, DFK, Immutable, Solana, Arbitrum, Fantom, Klaytn, Optimism, Gnosis, Hedera, Ton, Base | 100 INR, 100 PHP     | 500000 INR, 50000 PHP |\n\n** for ethereum based on gas fee minimum amount changes.\n\n## Business FAQ's \n\n**How to Get Onboarded on Onmeta**\n\n1. **Test the integration in Sandbox** via the staging dashboard (\\[documentation available])\n2. **Register & Onboard**: Submit KYB documents to get access to production API Keys\n3. **Complete Integration** with Production credentials\n4. **Integration Check Call** with Onmeta Tech team\n5. **Go Live** immediately\n\n---\n\n**KYB Requirements for Businesses**\n\n  ### Identity Proof (any one for Authorised Signatory/UBOs):\n\n* Driving License\n* Passport\n* Any Government Issued ID Card\n* PAN/TAN\n\n### Address Proof (any one for Authorised Signatory/UBOs):\n\n* Utility Bills\n* Bank Statement\n* Nationality Card\n* Telecom Bill\n* Tenancy Agreement\n\n### Company Documents:\n\n* Incorporation Certificate\n* Company Tax-related Certificate\n\n---\n\n**Onmeta On-Ramp User Flow**\n\n<img src=\"images/Business-FAQ-01.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"500\" height=\"300\" />\n\n---\n\n**Customization Options**\n\n* Choose from 5000+ supported tokens across 6 blockchains\n* Enable/disable specific tokens (e.g., only USDC on Polygon)\n* **India**: UPI or Bank Transfer\n* **Philippines**: Gcash, Paymaya, GrabPay\n\n---\n\n**Onmeta Off-Ramp User Flow**\n\n<img src=\"images/Business-FAQ-02.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"500\" height=\"300\" />\n\n* Users receive withdrawals in **INR only**\n* Onmeta transfers funds from their Indian bank account to the user's Indian bank account\n\n---\n\n**Supported Blockchains**\n\n* Polygon\n* Ethereum\n* Binance\n* Arbitrum\n* Fantom\n* Avalanche\n\n*More blockchains coming soon.*\n\n---\n\n**Supported Fiat Currencies**\n\n* INR (Indian Rupees)\n* PHP (Philippine Peso)\n\n*More currencies planned.*\n\n---\n\n**Supported Tokens**\n\n* \\~5000 crypto tokens from decentralized exchanges (DEX) across supported chains\n\n---\n\n**Integration Types**\n\n* Widget Integration\n* API Integration\n\n  ### Choosing Between Widget and API\n\n* **Widget**: Quick go-to-market (integration in \\~10 minutes)\n* **API**: For clients with specific needs beyond widget capabilities\n\n---\n\n**Crypto Liquidity Sourcing**\n\n* Partnered with top crypto exchanges and liquidity providers in India and globally\n* Real-time price sourcing for best execution\n\n---\n\n**Legal & Compliance**\n\n* KYC & AML checks included\n* Onmeta can handle user KYC; if client handles KYC, data must be shared\n* Taxes (TDS, GST) handled for India\n\n---\n\n**KYC Policy**\n\n* Users must verify one proof of Identity and one proof of Address\n* KYC is **mandatory** for all transactions (On & Off Ramp)\n* **KYC is one-time** (stored on-chain)\n\n---\n\n**Tax Liabilities (India)**\n\n* **GST**: 18% on Onmeta's 1.5% platform fee\n* **TDS**: 1% withheld on crypto buy/sell\n* **Capital Gains**: 30% tax payable by user directly (Onmeta/clients not liable)\n\n---\n\n**Minimum KYC Data for Off-Ramp (Widget Users)**\n\n* Selfie (liveliness check)\n* PAN (Identity Proof)\n* Aadhar (Address Proof)\n\n*Verification time: 2-3 minutes.*\n\n---\n\n**Getting Started with Integration**\n\n* Self-serve dashboard available\n* Sign up to access integration steps\n\n---\n\n**Payment Method Support**\n\n### India\n\n* NEFT\n* IMPS\n* RTGS\n* UPI (Google Pay, PhonePe, Paytm, etc.)\n\n### Philippines\n\n* GCash\n* PayMaya\n* GrabPay\n* InstaPay\n\n---\n\n**Transaction Processing Times**\n\n* Onramp & Offramp typically < 1 minute\n* Fiat credited within a minute of receiving USDC (may vary with bank downtime)\n\n---\n\n**Onramp Limits (Suggested)**\n\n| Chain               | Minimum Limit      | Maximum Limit         |\n| ------------------- | ------------------ | --------------------- |\n| Ethereum            | 2000 INR, 2000 PHP | 500000 INR, 50000 PHP |\n| Polygon             | 50 INR, 50 PHP     | 500000 INR, 50000 PHP |\n| Binance Smart Chain | 500 INR, 500 PHP   | 500000 INR, 50000 PHP |\n| Avalanche           | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Arbitrum            | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Fantom              | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Ton                 | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Hedera              | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Base                | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Tron                | 200 INR, 200 PHP   | 500000 INR, 50000 PHP |\n\n---\n\n**Payment Method Limits**\n\n* **UPI**: Max 1 Lakh INR/user/day (subject to user bank limits)\n* **Bank Transfer (IMPS/NEFT/RTGS)**: Max 5 Lakhs INR/transaction\n\n---\n\n**Off-Ramp to Foreign Accounts?**\n\n* ❌ Not supported — only verified **Indian bank accounts** allowed\n\n---\n\n**User Support Options**\n\n* Live chat within Onmeta widget\n* Onmeta Telegram Group\n* Email: [support@onmeta.in](mailto:support@onmeta.in)\n\n---\n\n**Liquidity Sources**\n\n* Major CEXs and DEXs in each region\n* Compliant with local regulations\n* INR liquidity from Indian exchanges\n\n---\n## User FAQ's\n\n**1.How do we copy the UTR from the UPI Apps?**\n\nSome UPI apps like Phonepay and Paytm allow you to copy UTR using a copy button but many do not. It is best to use the transaction confirmation SMS received from the UPI app and copy the UTR from there. You can refer to the document here\n\n**2. Is credit card payment method supported for making onramp transactions?**\n\nWe don’t support any type of card payments for both INR & PHP currencies\n\n**3. What is the typical onchain transaction cost?**\n\nOnchain transaction cost varies all the time based on demand supply match of validators and also by the chain. Networks like polygon have very low network fees in comparison to the size of transaction while networks like ethereum have very high network fees in comparison to the size of transaction.\n\n**4. What are your KYC policies? Is it mandatory to complete KYC before transacting?**\n\nWe need users to verify one proof of Identity and one proof of address before they can transact on our platform. \n\n**5. How long does it take to complete the account verification?**\n\nWe do real time KYC verification of end users. The whole process can be completed in less than a minute if the user has all the documents ready.\n\n**6. How much time does it take to On-ramp with Onmeta?**\n\nOur On-ramp (Buy) transactions typically take less than a minute to process.\n\n**7. What support options do users have if they face any issues with Onmeta?**\n\nThe users have three options to reach out to Onmeta Support:\n\nLive chat option in the Onmeta widget\nOnmeta Telegram Group\nUser can email us at support@onmeta.in\n\n\n**8. What is the maximum and minimum limit for Onramp transactions ?**\n\n| Chain               | Minimum Limit      | Maximum Limit         |\n| ------------------- | ------------------ | --------------------- |\n| Ethereum            | 2000 INR, 2000 PHP | 500000 INR, 50000 PHP |\n| Polygon             | 50 INR, 50 PHP     | 500000 INR, 50000 PHP |\n| Binance Smart Chain | 500 INR, 500 PHP   | 500000 INR, 50000 PHP |\n| Avalanche           | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Arbitrum            | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Fantom              | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Ton                 | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Hedera              | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Base                | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Tron                | 200 INR, 200 PHP   | 500000 INR, 50000 PHP |\n\n\n**9. Does the transaction limit change with the payment method?**\n\nYes, for UPI transactions Max limit per user per day is 1 Lakh. It also varies with limits set by the user bank account. For Bank Transfer (IMPS/NEFT/RTGS), Max limit is up to 5 Lakh per transaction.\n\n**10. How much time does it take to Off-ramp with Onmeta?**\n\nWe batch process our Off-ramp (Sell) orders, it typically take 24 Banking Hours to process.\n\n**11. What is the maximum and minimum limit for Offramp transactions ?**\n  | Chain               | Minimum Limit      | Maximum Limit         |\n| ------------------- | ------------------ | --------------------- |\n| Ethereum            | 5000 INR, 5000 PHP | 500000 INR, 50000 PHP |\n| Polygon             | 100 INR, 100 PHP     | 500000 INR, 50000 PHP |\n| Binance Smart Chain | 500 INR, 500 PHP   | 500000 INR, 50000 PHP |\n| Avalanche           | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Arbitrum            | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Fantom              | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Ton                 | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Hedera              | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Base                | 100 INR, 100 PHP   | 500000 INR, 50000 PHP |\n| Tron                | 200 INR, 200 PHP   | 500000 INR, 50000 PHP |\n\n\n**12. Can we offramp money to foreign bank account?**\n\nWe support payouts to only verified Indian bank accounts \n\n**13. What do you do to prevent money laundering?**\n\nWe have an AML policy and strictly adhere to it; You can find our AML policy here\n\n**14. If Onmeta is a regulated entity?**\n\nThere is no VASP (Virtual Asset Service Provider) license in India yet which can\nregulate the businesses dealing in Cryptocurrency. The most significant piece of\nlegislation with respect to regulating crypto businesses in India pertains to the March\n2023 amendment brought by the Government of India to the Prevention of Money\nLaundering Act (PMLA) 2002 which brings all crypto businesses under the purview of\nPMLA. As a result, it is required of all crypto businesses in India to register with the\nFinancial Intelligence Unit (FIU) of the Ministry of Finance of the Government of India\nand proactively report any suspicious activity. Onmeta has registered for the same\nand is complying with all the requirements.\n"
-    },
-    {
-      "name": "KYC Webhook Configuration",
-      "description": "Set up your kyc webhook endpoint in the merchant dashboard\n<img src=\"images/KYC_Webhook.png\" style=\"display: block; margin: 0 auto;\"  alt=\"Alt Text\" width=\"500\" height=\"300\" />\n\nWebhook Events\n\nYou receive the following events on your configured webhook endpoint, when the user is completing the KYC( Know Your Customer ) process on the Onmeta widget.\nAll the event-names are present in eventName field in the webhook request body while description of the events are present in the message field\n\n## KYC Webhook Events - Event Names\n\n| #  | EventName             | Description                                              |\n|----|------------------------|----------------------------------------------------------|\n| 1  | KYCInit                | KYC process has been initiated.                          |\n| 2  | SelfieSuccess          | Selfie step has been captured successfully.              |\n| 3  | SelfieFailure          | Selfie step has been failed.                             |\n| 4  | PanSuccess             | Pan capture step has been captured successfully.         |\n| 5  | PanFailure             | Pan capture step is failed.                              |\n| 6  | AadhaarFrontSuccess    | Aadhaar front capture step has been captured successfully.|\n| 7  | AadhaarFrontFailure    | Aadhaar front capture step failed.                       |\n| 8  | AadhaarBackSuccess     | Aadhaar Back capture step has been captured successfully.|\n| 9  | AadhaarBackFailure     | Aadhaar Back capture step failed.                        |\n| 10 | KYCCompleted           | KYC Process is completed.                                |\n\n\n## KYC Webhook  - Messages\n\nSelfie\n\n| #  | Messages                                                     \n|----|---------------------------------------------------------------------------------|\n| 1  | Selfie has already been verified!\n| 2  | Too many failed attempts, please try after an hour!\n| 3  | Selfie is not accurate, please try again!\n| 4  | Selfie uploaded successfully!\n| 5  | Selfie could not be processed!\n\nPAN\n\n| #  | Messages                                                     \n|----|---------------------------------------------------------------------------------|\n| 1  |  User's PAN has already been verified\n| 2  |  please upload selfie before uploading pan document!\n| 3  |  Too many failed attempts, please try after an hour! \n| 4  |  A user with this PAN exists already!\n| 5  |  Face in PAN does not match with selfie!\n| 6  |  Pan not verified successfully!\n| 7  |  PAN verified successfully!                       \n\nAadhaar\n\n| #  | Message                                                                 |\n|----|-------------------------------------------------------------------------|\n| 1  | User's Aadhaar has already been verified                                |\n| 2  | Please upload selfie and pan before uploading Aadhaar document!         |\n| 3  | Too many failed attempts, please try after an hour!                     |\n| 4  | Please upload Aadhaar front only                                        |\n| 5  | Please upload Aadhaar back only                                         |\n| 6  | Aadhaar number does not match with the PAN card                         |\n| 7  | A user with this Aadhaar exists already!                                |\n| 8  | Selfie not uploaded properly, please upload selfie again!               |\n| 9  | Face in Aadhaar does not match with selfie!                             |\n| 10 | Aadhaar front verified successfully!                                    |\n| 11 | Aadhaar front has to be uploaded before Aadhaar back                    |\n| 12 | aadhaar_back's details do not match with aadhaar_front_bottom's details|\n| 13 | Aadhaar verified successfully!                                          |\n| 14 | Internal server error! Please try again later.                          |\n\n\n## Webhook Request Body\n\nSuccess Event\n\n```json\n  {\n    \"success\": true,\n    \"message\": \"selfie uploaded successfully!\",\n    \"createdAt\": \"2023-05-29T16:21:29.053Z\",\n    \"email\": \"sample.testing@email.com\",\n    \"webhookUrl\": \"https://your-kyc-webhook.com\",\n    \"tenantId\": \"63bff28c42e2ae343ed2829b\",\n    \"eventName\" : \"SelfieSuccess\"\n  }\n```\n\nFailure Event\n```json\n    {\n      \"success\": false,\n      \"message\": \"Too many failed attempts, please try after an hour!\",\n      \"createdAt\": \"2023-05-29T16:21:29.053Z\",\n      \"email\": \"sample.testing@email.com\",\n      \"webhookUrl\": \"https://your-kyc-webhook.com\",\n      \"tenantId\": \"63bff28c42e2ae343ed2829b\",\n      \"eventName\" : \"SelfieFailure\"\n    }\n```\n"
+      "name": "Widget",
+      "description": "Onmeta Widget Integration\n# Prerequesite\n  To get started with the widget integration and also to avail the above customisations you need to register yourselves in our Staging Dashboard. Follow the steps below to setup your account in our dashboard:\n  \n> ![API Key flow](https://onmetahq.github.io/docs/images/widget-01.png)\n"
     },
     {
       "name": "Onramp API",
@@ -422,6 +397,17 @@
             "description": "API key from dashboard."
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "Fetch bank verification status": {
+                  "value": ""
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Fetch bank verification status - Success",
@@ -493,305 +479,6 @@
                       },
                       "error": {},
                       "success": true
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/users/kyc-status": {
-      "get": {
-        "tags": [
-          "Customer"
-        ],
-        "summary": "Get KYC Status",
-        "description": "Get KYC Status",
-        "operationId": "getKYCStatus",
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string",
-              "example": "{{api_key}}"
-            },
-            "description": "API key from dashboard."
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string",
-              "example": "Bearer {{access_token}}"
-            },
-            "description": "Access token from login."
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "example": "krishna@onmeta.in"
-                  }
-                }
-              },
-              "examples": {
-                "User Login": {
-                  "value": {
-                    "email": "krishna@onmeta.in"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Get KYC Status - Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "isKycVerified": {
-                          "type": "string",
-                          "example": "true"
-                        }
-                      }
-                    },
-                    "error": {
-                      "type": "object",
-                      "properties": {}
-                    },
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    }
-                  }
-                },
-                "examples": {
-                  "Get KYC Status - Success": {
-                    "value": {
-                      "data": {
-                        "isKycVerified": "true"
-                      },
-                      "error": {},
-                      "success": true
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Get KYC Status - Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {}
-                    },
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid request"
-                        }
-                      }
-                    },
-                    "success": {
-                      "type": "boolean",
-                      "example": false
-                    }
-                  }
-                },
-                "examples": {
-                  "Get KYC Status - Bad Request": {
-                    "value": {
-                      "data": {},
-                      "error": {
-                        "message": "Invalid request"
-                      },
-                      "success": false
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/users/upload/kyc": {
-      "post": {
-        "tags": [
-          "Customer"
-        ],
-        "summary": "Submit KYC Data",
-        "description": "User can submit kyc data through below API endpoint.\n\n**All the above data in the request body should be form-data.Make sure you submit valid KYC (Aadhaar, PAN) details**\n\nThe below parameters are required and need to be encrypted using following code:\n  - firstName, \n  -  lastName\n  -  panNumber\n  -  aadharNumber\n\nCode snippet for encryption:\n```js\n  const crypto = require(\"crypto\")\n\n  const encrypt = (plainText, password) => {\n    try {\n      const iv = crypto.randomBytes(16);\n      const key = crypto.createHash('sha256').update(password).digest('base64').substr(0, 32);\n      const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);\n\n      let encrypted = cipher.update(plainText);\n      encrypted = Buffer.concat([encrypted, cipher.final()])\n      return iv.toString('hex') + ':' + encrypted.toString('hex');\n\n    } catch (error) {\n      console.log(error);\n    }\n  }\n\n  // to generate encryption\n  sampleText = \"apple\"\n  encryptedText = encrypt(sampleText, SECRET_KEY)\n  console.log(encryptedText)\n```\n\nFor access to **SECRET_KEY** for encryption please contact **nirmal@onmeta.in**\n\nCreate a POST request with above encrypted values for successfully uploading KYC data.\n",
-        "operationId": "submitKYCData",
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string",
-              "example": "{{api_key}}"
-            },
-            "description": "API key from dashboard."
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "schema": {
-              "type": "string",
-              "example": "Bearer {{access_token}}"
-            },
-            "description": "Access token from login."
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "example": "krishna@onmeta.in"
-                  },
-                  "selfie": {
-                    "type": "string",
-                    "example": null
-                  },
-                  "aadharFront": {
-                    "type": "string",
-                    "example": null
-                  },
-                  "aadharBack": {
-                    "type": "string",
-                    "example": null
-                  },
-                  "panFront": {
-                    "type": "string",
-                    "example": null
-                  },
-                  "panBack": {
-                    "type": "string",
-                    "example": null
-                  },
-                  "panNumber": {
-                    "type": "string",
-                    "example": null
-                  },
-                  "aadharNumber": {
-                    "type": "string",
-                    "example": null
-                  },
-                  "firstName": {
-                    "type": "string",
-                    "example": null
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "example": null
-                  },
-                  "incomeRange": {
-                    "type": "string",
-                    "example": "Income range as string from one of the options. <10L , 10L-15L, 15L-20L, 20L-25L, 25L-50L, >50L"
-                  },
-                  "profession": {
-                    "type": "string",
-                    "example": "occupation/profession of the person. Writer, Journalist, Business man"
-                  }
-                }
-              },
-              "examples": {
-                "User Login": {
-                  "value": {
-                    "email": "krishna@onmeta.in"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Submit KYC Data - Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {}
-                    },
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    }
-                  }
-                },
-                "examples": {
-                  "Get KYC Status - Success": {
-                    "value": {
-                      "error": {},
-                      "success": true
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Submit KYC Data - Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {}
-                    },
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid request"
-                        }
-                      }
-                    },
-                    "success": {
-                      "type": "boolean",
-                      "example": false
-                    }
-                  }
-                },
-                "examples": {
-                  "Get KYC Status - Bad Request": {
-                    "value": {
-                      "error": {
-                        "message": "Invalid request"
-                      },
-                      "success": false
                     }
                   }
                 }
@@ -1804,202 +1491,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response with fiat currency data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "currencyCode": {
-                            "type": "string",
-                            "example": "INR"
-                          },
-                          "fraction": {
-                            "type": "integer",
-                            "example": 2
-                          },
-                          "symbol": {
-                            "type": "string",
-                            "example": "₹"
-                          },
-                          "paymentModes": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "code": {
-                                  "type": "string",
-                                  "example": "INR_UPI"
-                                },
-                                "imageUrl": {
-                                  "type": "string",
-                                  "format": "uri",
-                                  "example": "https://ik.imagekit.io/z3vwasz5xwz/Meta_widget/upi_EKaRsjhbi.png"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/orders/chain_limits": {
-      "get": {
-        "tags": [
-          "Onramp Api",
-          "Orders"
-        ],
-        "summary": "Get chain wise limits",
-        "description": "Get chain wise limits",
-        "operationId": "chainWiseLimits",
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "schema": {
-              "type": "string",
-              "example": "{{api_key}}"
-            },
-            "description": "API key from dashboard."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get chain wise limits - Success",
-            "headers": {
-              "Connection": {
-                "schema": {
-                  "type": "string",
-                  "example": "keep-alive"
-                }
-              },
-              "Content-Length": {
-                "schema": {
-                  "type": "string",
-                  "example": "102"
-                }
-              },
-              "Date": {
-                "schema": {
-                  "type": "string",
-                  "example": "Mon, 17 Oct 2022 13:35:40 GMT"
-                }
-              },
-              "Server": {
-                "schema": {
-                  "type": "string",
-                  "example": "nginx/1.18.0 (Ubuntu)"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "_id": {
-                            "type": "string",
-                            "example": "672217126d5ba990eee5837b"
-                          },
-                          "chain": {
-                            "type": "string",
-                            "example": "Ethereum"
-                          },
-                          "chainId": {
-                            "type": "integer",
-                            "example": 1
-                          },
-                          "maxLimit": {
-                            "type": "object",
-                            "properties": {
-                              "INR": {
-                                "type": "number",
-                                "example": 500000
-                              },
-                              "PHP": {
-                                "type": "number",
-                                "example": 50000
-                              }
-                            }
-                          },
-                          "minLimit": {
-                            "type": "object",
-                            "properties": {
-                              "INR": {
-                                "type": "number",
-                                "example": 2000
-                              },
-                              "PHP": {
-                                "type": "number",
-                                "example": 2000
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "error": {
-                      "type": "object",
-                      "example": {}
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Get chain wise limits - Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": false
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {}
-                    },
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid request"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "description": ""
           }
         }
       }
@@ -2026,59 +1518,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "url": {
-                          "type": "string",
-                          "format": "uri",
-                          "example": "https://stg-invoice.sgp1.digitaloceanspaces.com/v1/669189cfb50c4dff0faef7c9.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=DO00F4EQRRW9W32R93U3%2F20250505%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250505T080048Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=ca84e35f5f4f3df272e3920ab0b2134ded22c32982e649d7d179290f13dcd76b"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": false
-                    },
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid order id"
-                        },
-                        "code": {
-                          "type": "string",
-                          "example": "INVALID_ORDER_ID"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "description": ""
           }
         }
       },
@@ -2893,12 +2333,7 @@
     {
       "name": "Widget",
       "tags": [
-        "Widget Intro",
-        "Widget Creation",
-        "KYC with Widget",
-        "How to find the UTR details?",
-        "FAQ's",
-        "KYC Webhook Configuration"
+        "Widget"
       ]
     },
     {
