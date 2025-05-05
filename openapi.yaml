@@ -549,15 +549,15 @@ tags:
 
         **1.Generate Sell Quote by entering fiat amount**
         
-        <img src="docs/images/cust_off_01.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="300" height="300" /> 
+        <img src="images/cust_off_01.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="300" height="300" /> 
         
         **2.Complete KYC check**
 
-        <img src="docs/images/cust_off_02.png" style="display: block; margin: 0 auto;" alt="Alt Text" width="300" height="300" /> 
+        <img src="images/cust_off_02.png" style="display: block; margin: 0 auto;" alt="Alt Text" width="300" height="300" /> 
         
         **3. Fetch Bank Details**
          
-        <img src="docs/images/cust_off_03.png" style="display: block; margin: 0 auto;" alt="Alt Text" width="300" height="300" />
+        <img src="images/cust_off_03.png" style="display: block; margin: 0 auto;" alt="Alt Text" width="300" height="300" />
 
         **4. OTP API **
             Onmeta will send below request body to client's otp-api endpoint to send otp to user email.
@@ -573,11 +573,11 @@ tags:
           ```
           **5. User enters OTP (stores it locally)**
         
-          <img src="docs/images/cust_off_04.png" style="display: block; margin: 0 auto;" alt="Alt Text" width="300" height="300" />
+          <img src="images/cust_off_04.png" style="display: block; margin: 0 auto;" alt="Alt Text" width="300" height="300" />
 
           **6. Select bank account**
 
-          <img src="docs/images/cust_off_05.png" style="display: block; margin: 0 auto;" alt="Alt Text" width="300" height="300" />
+          <img src="images/cust_off_05.png" style="display: block; margin: 0 auto;" alt="Alt Text" width="300" height="300" />
 
           **7.Create Order**
 
@@ -630,12 +630,12 @@ tags:
           **Withdrwaing Tokens**
 
 
-          <img src="docs/images/cust_off_06.png" alt="Alt Text" style="display: block; margin: 0 auto;" width="300" height="300" />
+          <img src="images/cust_off_06.png" alt="Alt Text" style="display: block; margin: 0 auto;" width="300" height="300" />
           
 
           **Transaction success**
             
-          <img src="docs/images/cust_off_07.png" alt="Alt Text" style="display: block; margin: 0 auto;" width="300" height="300" />
+          <img src="images/cust_off_07.png" alt="Alt Text" style="display: block; margin: 0 auto;" width="300" height="300" />
 
           # Checkout flow - Onramp
 
@@ -871,7 +871,7 @@ tags:
     description: |
         Know Your Customer verification can be done with our widget itself let's see how it can be done.
         
-        <img src="docs/images/KYC_with_Widget_01.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="300" height="300" /> 
+        <img src="images/KYC_with_Widget_01.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="300" height="300" /> 
 
         **Note:**
         This feature is not available by default, if needed talk to our sales team.
@@ -905,7 +905,7 @@ tags:
 
         All webhook events for KYC can be captured as well, you need to setup callback url in dashboard as shown below
         
-        <img src="docs/images/KYC_Webhook.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" /> 
+        <img src="images/KYC_Webhook.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" /> 
 
         And you can refer to this page for webhook events and their detials 
   - name: How to find the UTR details?
@@ -919,17 +919,17 @@ tags:
         or After a successful transaction on PhonePe, click on Done.
         Go to history and select the particular transaction. UTR number (as shown in the screenshot) is the required UPI transaction ID.
         
-        <img src="docs/images/UTR-01.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="200" height="300" />
+        <img src="images/UTR-01.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="200" height="300" />
         
         ## Google Pay
         UPI Transaction ID (as shown in the screenshot) is the correct UPI transaction ID
-        <img src="docs/images/UTR-02.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="200" height="300" />
+        <img src="images/UTR-02.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="200" height="300" />
         
         ## Paytm
         Once you have made a transaction via Paytm UPI, click on “View Details”
         or UPI Reference No. (as shown in the screenshot) is the correct UPI transaction ID
       
-        <img src="docs/images/UTR-03.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="200" height="300" />
+        <img src="images/UTR-03.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="200" height="300" />
 
   - name: FAQ's
     description: |
@@ -963,7 +963,7 @@ tags:
         **6. Where do we find the API keys?**
 
         You can find the API keys inside the developer section of the Onmeta dashboard.
-        <img src="docs/images/dash-03.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" />
+        <img src="images/dash-03.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" />
 
         **7. Do you provide a sandbox environment for testing?**
 
@@ -981,7 +981,7 @@ tags:
 
         We have a live chat widget using which customers can raise queries to us. The live chat widget can be accessed by clicking the hamburger menu in the top right corner.
 
-        <img src="docs/images/FAQ-10.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="200" height="300" />
+        <img src="images/FAQ-10.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="200" height="300" />
 
         **11. Is the widget customizable? What options do you provide?**
 
@@ -1130,7 +1130,7 @@ tags:
 
 
         Solana
-        <img src="docs/images/FAQ-38.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" /> 
+        <img src="images/FAQ-38.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" /> 
 
         **39. Bank account link status and their definitions.**
 
@@ -1190,7 +1190,7 @@ tags:
 
         **Onmeta On-Ramp User Flow**
 
-        <img src="docs/images/Business-FAQ-01.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" />
+        <img src="images/Business-FAQ-01.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" />
 
         ---
 
@@ -1205,7 +1205,7 @@ tags:
 
         **Onmeta Off-Ramp User Flow**
 
-        <img src="docs/images/Business-FAQ-02.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" />
+        <img src="images/Business-FAQ-02.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" />
 
         * Users receive withdrawals in **INR only**
         * Onmeta transfers funds from their Indian bank account to the user's Indian bank account
@@ -1467,7 +1467,7 @@ tags:
   - name: KYC Webhook Configuration
     description: |
         Set up your kyc webhook endpoint in the merchant dashboard
-        <img src="docs/images/KYC_Webhook.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" />
+        <img src="images/KYC_Webhook.png" style="display: block; margin: 0 auto;"  alt="Alt Text" width="500" height="300" />
         
         Webhook Events
 
