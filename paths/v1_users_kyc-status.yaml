@@ -1,0 +1,87 @@
+get:
+  tags:
+    - Customer
+  summary: Get KYC Status
+  description: Get KYC Status
+  operationId: getKYCStatus
+  parameters:
+    - name: x-api-key
+      in: header
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+    - name: Authorization 
+      in: header
+      schema:
+        type: string
+        example: 'Bearer {{access_token}}'
+      description: Access token from login.
+  requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: krishna@onmeta.in
+            examples:
+              User Login:
+                value:
+                  email: krishna@onmeta.in
+  responses:
+    '200':
+      description: Get KYC Status - Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  isKycVerified:
+                    type: string
+                    example: >-
+                      true
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            Get KYC Status - Success:
+              value:
+                data:
+                  isKycVerified: >-
+                    true
+                error: {}
+                success: true
+    '400':
+      description: Get KYC Status - Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties: {}
+              error:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Invalid request'
+              success:
+                type: boolean
+                example: false
+          examples:
+            Get KYC Status - Bad Request:
+              value:
+                data: {}
+                error:
+                  message: 'Invalid request'
+                success: false

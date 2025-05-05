@@ -11,12 +11,6 @@ get:
         type: string
         example: '{{api_key}}'
       description: API key from dashboard.
-  requestBody:
-    content:
-      application/json:
-        examples:
-          Fetch bank verification status:
-            value: ''
   responses:
     '200':
       description: Fetch bank verification status - Success

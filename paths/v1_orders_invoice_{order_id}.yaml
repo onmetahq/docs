@@ -18,6 +18,41 @@ get:
   responses:
     '200':
       description: ''
+      content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        format: uri
+                        example: https://stg-invoice.sgp1.digitaloceanspaces.com/v1/669189cfb50c4dff0faef7c9.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=DO00F4EQRRW9W32R93U3%2F20250505%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250505T080048Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=ca84e35f5f4f3df272e3920ab0b2134ded22c32982e649d7d179290f13dcd76b
+    '400':
+      description: Bad Request
+      content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: 'Invalid order id'
+                      code:
+                        type: string
+                        example: 'INVALID_ORDER_ID'
+
 parameters:
   - name: order_id
     in: path

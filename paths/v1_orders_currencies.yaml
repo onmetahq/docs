@@ -14,4 +14,38 @@ get:
       description: API key from dashboard.
   responses:
     '200':
-      description: ''
+      description: Successful response with fiat currency data
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: true
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    currencyCode:
+                      type: string
+                      example: INR
+                    fraction:
+                      type: integer
+                      example: 2
+                    symbol:
+                      type: string
+                      example: ₹
+                    paymentModes:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                            example: INR_UPI
+                          imageUrl:
+                            type: string
+                            format: uri
+                            example: https://ik.imagekit.io/z3vwasz5xwz/Meta_widget/upi_EKaRsjhbi.png
