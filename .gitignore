@@ -134,3 +134,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Local reference specs (may contain transient keys)
+merchant-offramp-wallet-api.yaml

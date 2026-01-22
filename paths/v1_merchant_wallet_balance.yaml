@@ -1,0 +1,182 @@
+post:
+  tags:
+    - Merchant Wallet
+  summary: Get Wallet Balance
+  description: |
+    Fetches the current balance of the merchant wallet for a specific token on a given chain.
+
+    **Note:** Balance is returned in token units (not wei / smallest denomination).
+  operationId: postV1MerchantWalletBalance
+  parameters:
+    - name: x-api-key
+      in: header
+      required: true
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+    - name: Authorization
+      in: header
+      required: false
+      schema:
+        type: string
+        example: Bearer {{access_token}}
+      description: Optional bearer token (if applicable).
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - chainId
+            - tokenAddress
+          properties:
+            chainId:
+              type: integer
+              description: Blockchain network chain ID.
+              example: 137
+            tokenAddress:
+              type: string
+              description: Token contract address to check balance for.
+              example: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359'
+        examples:
+          Check USDC balance on Polygon:
+            value:
+              chainId: 137
+              tokenAddress: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359'
+          Check USDT balance on Polygon:
+            value:
+              chainId: 137
+              tokenAddress: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F'
+  responses:
+    '200':
+      description: Wallet balance retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: true
+              data:
+                type: object
+                properties:
+                  walletAddress:
+                    type: string
+                    example: '0x64Dc21C25Ba5ec2637e1fA32a5db7A845b9Ec282'
+                  walletBalance:
+                    type: number
+                    example: 0.91
+              error:
+                type: object
+                properties: {}
+          examples:
+            Successful balance retrieval:
+              value:
+                success: true
+                data:
+                  walletAddress: '0x64Dc21C25Ba5ec2637e1fA32a5db7A845b9Ec282'
+                  walletBalance: 0.91
+                error: {}
+    '400':
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              data:
+                type: object
+                properties: {}
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: VALIDATION_ERROR
+                  message:
+                    type: string
+                    example: Invalid request parameters
+                  details:
+                    type: object
+                    additionalProperties: true
+          examples:
+            Validation Error:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: VALIDATION_ERROR
+                  message: Invalid request parameters
+    '401':
+      description: Authentication failed - invalid or missing API key/token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              data:
+                type: object
+                properties: {}
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: UNAUTHORIZED
+                  message:
+                    type: string
+                    example: API key is required
+          examples:
+            Missing API Key:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: UNAUTHORIZED
+                  message: API key is required
+            Invalid Bearer Token:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: INVALID_TOKEN
+                  message: Bearer token is invalid or expired
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              data:
+                type: object
+                properties: {}
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INTERNAL_ERROR
+                  message:
+                    type: string
+                    example: An unexpected error occurred. Please try again later.
+          examples:
+            Server Error:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: INTERNAL_ERROR
+                  message: An unexpected error occurred. Please try again later.

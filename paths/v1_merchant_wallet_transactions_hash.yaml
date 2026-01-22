@@ -1,0 +1,191 @@
+post:
+  tags:
+    - Merchant Wallet
+  summary: Submit Transaction Hash
+  description: |
+    **Step 2 of Wallet Loading Process**
+
+    Confirms a wallet load transaction by submitting the transaction hash after you have sent funds to the `receiver_wallet_address` received from `/v1/merchant/wallet/load`.
+
+    ### Process Flow:
+    1. Call `/v1/merchant/wallet/load` and store the returned `orderId`
+    2. Transfer crypto to the returned `receiver_wallet_address`
+    3. Call this endpoint with `orderId`, `txnHash`, and `senderAddress`
+    4. Onmeta validates the transaction on-chain and credits the merchant wallet
+  operationId: postV1MerchantWalletTransactionsHash
+  parameters:
+    - name: x-api-key
+      in: header
+      required: true
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+    - name: Authorization
+      in: header
+      required: false
+      schema:
+        type: string
+        example: Bearer {{access_token}}
+      description: Optional bearer token (if applicable).
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - orderId
+            - txnHash
+            - senderAddress
+          properties:
+            orderId:
+              type: string
+              description: Order ID received from wallet load initiation.
+              example: fb938071-9344-4d03-8eef-d8bb2c2752d6
+            txnHash:
+              type: string
+              description: Blockchain transaction hash (0x-prefixed).
+              example: '0x3305e026788d45380a2af43395c46ace8f147193b4de5ddd01a029c96f15ef23'
+            senderAddress:
+              type: string
+              description: Wallet address that sent the transaction.
+              example: '0x4cDF040E5018D862D7dE16225b7A2e6F6aE7c4d6'
+        examples:
+          Submit transaction hash for confirmation:
+            value:
+              orderId: fb938071-9344-4d03-8eef-d8bb2c2752d6
+              txnHash: '0x3305e026788d45380a2af43395c46ace8f147193b4de5ddd01a029c96f15ef23'
+              senderAddress: '0x4cDF040E5018D862D7dE16225b7A2e6F6aE7c4d6'
+  responses:
+    '200':
+      description: Transaction confirmed and funds credited successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: true
+              data:
+                type: object
+                properties:
+                  creditedAmount:
+                    type: number
+                    description: Amount credited to merchant wallet after confirmation.
+                    example: 1
+              error:
+                type: object
+                properties: {}
+          examples:
+            Successful transaction confirmation:
+              value:
+                success: true
+                data:
+                  creditedAmount: 1
+                error: {}
+    '400':
+      description: Invalid transaction or order details
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              data:
+                type: object
+                properties: {}
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INVALID_TRANSACTION
+                  message:
+                    type: string
+                    example: Transaction hash not found on blockchain
+          examples:
+            Invalid transaction hash:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: INVALID_TRANSACTION
+                  message: Transaction hash not found on blockchain
+            Invalid order ID:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: ORDER_NOT_FOUND
+                  message: Load order not found or already processed
+    '401':
+      description: Authentication failed - invalid or missing API key/token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              data:
+                type: object
+                properties: {}
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: UNAUTHORIZED
+                  message:
+                    type: string
+                    example: API key is required
+          examples:
+            Missing API Key:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: UNAUTHORIZED
+                  message: API key is required
+            Invalid Bearer Token:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: INVALID_TOKEN
+                  message: Bearer token is invalid or expired
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              data:
+                type: object
+                properties: {}
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INTERNAL_ERROR
+                  message:
+                    type: string
+                    example: An unexpected error occurred. Please try again later.
+          examples:
+            Server Error:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: INTERNAL_ERROR
+                  message: An unexpected error occurred. Please try again later.

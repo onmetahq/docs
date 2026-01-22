@@ -1702,8 +1702,6 @@ paths:
     $ref: paths/v1_orders_invoice_{order_id}.yaml
   /webhooks:
     $ref: paths/v1_webhooks.yaml
-  /v1/offramp/orders/create:
-    $ref: paths/v1_offramp_orders_create.yaml
   /v1/offramp/orders/status:
     $ref: paths/v1_offramp_orders_status.yaml
   /v1/offramp/orders/txnhash:
@@ -1712,4 +1710,10 @@ paths:
     $ref: paths/v1_quote_sell.yaml
   /v1/merchant/wallet/load:
     $ref: paths/v1_merchant_wallet_load.yaml
+  /v1/merchant/wallet/transactions/hash:
+    $ref: paths/v1_merchant_wallet_transactions_hash.yaml
+  /v1/merchant/wallet/balance:
+    $ref: paths/v1_merchant_wallet_balance.yaml
+  /v1/offramp/orders/create:
+    $ref: paths/v1_offramp_orders_create.yaml
 components: {}

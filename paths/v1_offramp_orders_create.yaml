@@ -1,6 +1,7 @@
 post:
   tags:
-    - Offramp orders
+    - Offramp Orders
+    - Merchant Wallet
   summary: Create Order
   description: >-
     | **Body params** | **Description** |
