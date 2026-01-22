@@ -1633,6 +1633,8 @@ tags:
     description: Offramp order creation api's
   - name: Offramp Quotation
     description: Get Offramp quotation by fiat amount.
+  - name: Merchant Wallet
+    description: Merchant wallet APIs for loading funds.
 x-tagGroups:
   - name: Home
     tags:
@@ -1664,6 +1666,9 @@ x-tagGroups:
   - name: Webhook
     tags:
       - Webhooks
+  - name: Merchant Wallet
+    tags:
+      - Merchant Wallet
 paths:
   /v1/users/login:
     $ref: paths/v1_users_login.yaml
@@ -1705,4 +1710,6 @@ paths:
     $ref: paths/v1_offramp_orders_txnhash.yaml
   /v1/quote/sell:
     $ref: paths/v1_quote_sell.yaml
+  /v1/merchant/wallet/load:
+    $ref: paths/v1_merchant_wallet_load.yaml
 components: {}

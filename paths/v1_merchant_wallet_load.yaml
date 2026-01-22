@@ -1,0 +1,220 @@
+post:
+  tags:
+    - Merchant Wallet
+  summary: Initiate Wallet Load
+  description: |
+    **Step 1 of Wallet Loading Process**
+
+    Initiates a wallet load transaction by creating an order and providing the merchant with a receiver wallet address to send funds to.
+
+    ### Process Flow:
+    1. Call this endpoint with desired amount and token details
+    2. System creates a load order and assigns an `orderId`
+    3. System returns the `receiver_wallet_address` for the merchant's dedicated wallet
+    4. Send the specified amount of tokens to this `receiver_wallet_address`
+    5. After sending, confirm the transaction via `/v1/merchant/wallet/transactions/hash`
+
+    ### Important Notes:
+    - Save the `orderId` for the next step (transaction confirmation)
+    - Funds sent to the `receiver_wallet_address` are credited after confirmation
+  operationId: postV1MerchantWalletLoad
+  parameters:
+    - name: x-api-key
+      in: header
+      required: true
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+    - name: Authorization
+      in: header
+      required: false
+      schema:
+        type: string
+        example: Bearer {{access_token}}
+      description: Optional bearer token (if applicable).
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - amount
+            - chainId
+            - tokenAddress
+          properties:
+            amount:
+              type: number
+              description: Amount of token to load into merchant wallet.
+              example: 200
+            chainId:
+              type: integer
+              description: Blockchain network chain ID.
+              example: 137
+            tokenAddress:
+              type: string
+              description: Token contract address.
+              example: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F'
+        examples:
+          Load USDT on Polygon:
+            value:
+              amount: 200
+              chainId: 137
+              tokenAddress: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F'
+          Load USDC on Polygon:
+            value:
+              amount: 1000
+              chainId: 137
+              tokenAddress: '0x3c499c542cef5e3811e1192ce70d8cc03d5c3359'
+  responses:
+    '200':
+      description: Load order created successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: true
+              data:
+                type: object
+                properties:
+                  amount:
+                    type: number
+                    example: 200
+                  chainId:
+                    type: integer
+                    example: 137
+                  tokenAddress:
+                    type: string
+                    example: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F'
+                  orderId:
+                    type: string
+                    example: 66141155-24fd-431c-b9c6-94cc6fa5e61d
+                  receiver_wallet_address:
+                    type: string
+                    example: '0x64Dc21C25Ba5ec2637e1fA32a5db7A845b9Ec282'
+                  token_symbol:
+                    type: string
+                    example: USDT
+              error:
+                type: object
+                properties: {}
+          examples:
+            Successful load initiation:
+              value:
+                success: true
+                data:
+                  amount: 200
+                  chainId: 137
+                  tokenAddress: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F'
+                  orderId: 66141155-24fd-431c-b9c6-94cc6fa5e61d
+                  receiver_wallet_address: '0x64Dc21C25Ba5ec2637e1fA32a5db7A845b9Ec282'
+                  token_symbol: USDT
+                error: {}
+    '400':
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              data:
+                type: object
+                properties: {}
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: VALIDATION_ERROR
+                  message:
+                    type: string
+                    example: Invalid request parameters
+                  details:
+                    type: object
+                    additionalProperties: true
+          examples:
+            Validation Error:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: VALIDATION_ERROR
+                  message: Invalid request parameters
+                  details:
+                    fields:
+                      - field: amount
+                        error: Amount must be greater than 0
+    '401':
+      description: Authentication failed - invalid or missing API key/token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              data:
+                type: object
+                properties: {}
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: UNAUTHORIZED
+                  message:
+                    type: string
+                    example: API key is required
+          examples:
+            Missing API Key:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: UNAUTHORIZED
+                  message: API key is required
+            Invalid Bearer Token:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: INVALID_TOKEN
+                  message: Bearer token is invalid or expired
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              data:
+                type: object
+                properties: {}
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: INTERNAL_ERROR
+                  message:
+                    type: string
+                    example: An unexpected error occurred. Please try again later.
+          examples:
+            Server Error:
+              value:
+                success: false
+                data: {}
+                error:
+                  code: INTERNAL_ERROR
+                  message: An unexpected error occurred. Please try again later.
