@@ -1,0 +1,204 @@
+post:
+  tags:
+    - Customer
+  summary: NRI Upload KYC
+  description: Upload NRI KYC details.
+  operationId: nriUploadKyc
+  parameters:
+    - name: x-api-key
+      in: header
+      required: true
+      schema:
+        type: string
+        example: '{{api_key}}'
+      description: API key from dashboard.
+    - name: Authorization
+      in: header
+      required: true
+      schema:
+        type: string
+        example: 'Bearer {{access_token}}'
+      description: Access token from login.
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          required:
+            - name
+            - email
+            - dob
+            - 'address[pin]'
+            - 'address[state]'
+            - 'address[city]'
+            - 'address[locality]'
+            - 'documents[0].docName'
+            - 'documents[0].docNumber'
+          properties:
+            name:
+              type: string
+              example: Chet
+            email:
+              type: string
+              example: che@gmail.com
+            dob:
+              type: string
+              description: Date of birth.
+              example: 21/12/1998
+            'address[pin]':
+              type: string
+              example: '222222'
+            'address[state]':
+              type: string
+              example: uk
+            'address[city]':
+              type: string
+              example: al
+            'address[locality]':
+              type: string
+              example: la
+            'documents[0].docName':
+              type: string
+              description: "Document name (e.g., passport)."
+              example: passport
+            'documents[0].docNumber':
+              type: string
+              description: Document number.
+              example: xe2345
+            'documents[0].docFile':
+              type: string
+              format: binary
+              description: Optional document file upload (if required by API).
+            'documents[0].docType':
+              type: string
+              description: Optional document type/category (if required by API).
+        examples:
+          NRI Upload KYC:
+            value:
+              name: Chet
+              email: che@gmail.com
+              dob: 21/12/1998
+              'address[pin]': '222222'
+              'address[state]': uk
+              'address[city]': al
+              'address[locality]': la
+              'documents[0].docName': passport
+              'documents[0].docNumber': xe2345
+  responses:
+    '200':
+      description: NRI Upload KYC - Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                description: Success response payload.
+                properties:
+                  message:
+                    type: string
+                    example: successfully uploaded kyc documents
+              error:
+                type: object
+                properties: {}
+              success:
+                type: boolean
+                example: true
+          examples:
+            NRI Upload KYC - Success:
+              value:
+                success: true
+                data:
+                  message: successfully uploaded kyc documents
+                error: {}
+    '400':
+      description: NRI Upload KYC - Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties: {}
+              error:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 400
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Bad Request
+              success:
+                type: boolean
+                example: false
+          examples:
+            NRI Upload KYC - Bad Request:
+              value:
+                success: false
+                error:
+                  code: 400
+                  data:
+                    message: Bad Request
+    '401':
+      description: NRI Upload KYC - Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              error:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 401
+                  message:
+                    type: string
+                    example: unauthorized to access
+          examples:
+            Unauthorized:
+              value:
+                success: false
+                error:
+                  code: 401
+                  message: unauthorized to access
+    '409':
+      description: NRI Upload KYC - Conflict
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              error:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    example: 409
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Kyc has already been completed for this customer
+          examples:
+            KYC already completed:
+              value:
+                success: false
+                error:
+                  code: 409
+                  data:
+                    message: Kyc has already been completed for this customer

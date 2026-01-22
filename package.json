@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "redocly build-docs openapi.yaml -o docs/index.html",
+    "build": "node scripts/build-docs.mjs && redocly bundle openapi.yaml -o docs/openapi.json --ext json",
     "serve": "redocly preview-docs openapi.yaml"
   },
   "keywords": [],

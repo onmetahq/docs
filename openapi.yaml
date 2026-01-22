@@ -1682,6 +1682,8 @@ paths:
     $ref: paths/v1_users_kyc-status.yaml
   /v1/users/upload/kyc:
     $ref: paths/v1_users_kyc-submit.yaml
+  /v1/users/nri/kyc:
+    $ref: paths/v1_users_nri_kyc.yaml
   /v1/tokens:
     $ref: paths/v1_tokens_.yaml
   /v1/quote/buy:

@@ -1,4 +1,13 @@
-<!doctype html>
+import fs from "node:fs";
+import path from "node:path";
+
+const rootDir = process.cwd();
+const docsDir = path.join(rootDir, "docs");
+const indexHtmlPath = path.join(docsDir, "index.html");
+
+fs.mkdirSync(docsDir, { recursive: true });
+
+const html = `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -35,3 +44,7 @@
     ></script>
   </body>
 </html>
+`;
+
+fs.writeFileSync(indexHtmlPath, html, "utf8");
+console.log(`Wrote ${path.relative(rootDir, indexHtmlPath)}`);
